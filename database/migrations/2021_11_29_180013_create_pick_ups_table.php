@@ -20,6 +20,7 @@ class CreatePickUpsTable extends Migration
             $table->time('start');
             $table->time('end');
             $table->string('notes')->nullable();
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

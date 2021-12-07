@@ -14,7 +14,7 @@ class PickUpController extends Controller
      */
     public function index()
     {
-        return PickUp::all();
+        return auth()->user()->pickups;
     }
 
     /**
@@ -32,6 +32,8 @@ class PickUpController extends Controller
             'end' => 'required',
         ]);
 
+        $request['user_id'] = auth()->id();
+
         return PickUp::create($request->all());
     }
 
@@ -43,7 +45,7 @@ class PickUpController extends Controller
      */
     public function show($id)
     {
-        return PickUp::find($id);
+        return auth()->user()->pickups->where('id', $id);
     }
 
     /**
@@ -55,9 +57,12 @@ class PickUpController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $pickup = PickUp::find($id);
-        $pickup->update($request->all());
-        return $pickup;
+        return auth()
+            ->user()
+            ->pickups
+            ->where('id', $id)
+            ->first()
+            ->update($request->all());
     }
 
     /**
@@ -68,7 +73,12 @@ class PickUpController extends Controller
      */
     public function destroy($id)
     {
-        return PickUp::destroy($id);
+        return auth()
+            ->user()
+            ->pickups
+            ->where('id', $id)
+            ->first()
+            ->destroy($id);
     }
 
     /**
@@ -79,6 +89,6 @@ class PickUpController extends Controller
      */
     public function search($weekday)
     {
-        return PickUp::where('weekday', $weekday)->get();
+        return auth()->user()->pickups->where('weekday', $weekday);
     }
 }

@@ -13,6 +13,15 @@ class PickUp extends Model
         'weekday',
         'start',
         'end',
-        'notes'
+        'notes',
+        'user_id'
     ];
+
+    /**
+     * Get the user that owns the pickup.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

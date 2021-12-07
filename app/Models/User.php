@@ -41,4 +41,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the pickups for this user.
+     */
+    public function pickups()
+    {
+        return $this->hasMany(PickUp::class);
+    }
 }

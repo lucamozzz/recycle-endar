@@ -14,7 +14,9 @@ class PickUpController extends Controller
      */
     public function index()
     {
-        return auth()->user()->pickups;
+        return auth()
+            ->user()
+            ->pickups;
     }
 
     /**
@@ -45,7 +47,10 @@ class PickUpController extends Controller
      */
     public function show($id)
     {
-        return auth()->user()->pickups->where('id', $id);
+        return auth()
+            ->user()
+            ->pickups
+            ->where('id', $id);
     }
 
     /**
@@ -89,6 +94,9 @@ class PickUpController extends Controller
      */
     public function search($weekday)
     {
-        return auth()->user()->pickups->where('weekday', $weekday);
+        return auth()
+            ->user()
+            ->pickups
+            ->where('weekday', $weekday);
     }
 }

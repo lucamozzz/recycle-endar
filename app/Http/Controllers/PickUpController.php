@@ -14,9 +14,10 @@ class PickUpController extends Controller
      */
     public function index()
     {
-        return auth()
-            ->user()
-            ->pickups;
+        // return auth()
+        //     ->user()
+        //     ->pickups;
+        return Pickup::all();
     }
 
     /**

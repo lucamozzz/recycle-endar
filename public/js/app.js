@@ -6321,7 +6321,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 var Backdrop = (0,styled_components__WEBPACK_IMPORTED_MODULE_6__["default"])("div")(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    position: fixed;\n    z-index: 1040;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    background-color: #000;\n    opacity: 0.5;\n    "])));
-var CreatePickupModal = (0,styled_components__WEBPACK_IMPORTED_MODULE_6__["default"])(react_overlays_Modal__WEBPACK_IMPORTED_MODULE_7__["default"])(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  position: fixed;\n  width: 400px;\n  z-index: 1040;\n  top: 100px;\n  left: 25px;\n  border: 1px solid #e5e5e5;\n  background-color: white;\n  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);\n  padding: 20px;\n"])));
+var PickupModal = (0,styled_components__WEBPACK_IMPORTED_MODULE_6__["default"])(react_overlays_Modal__WEBPACK_IMPORTED_MODULE_7__["default"])(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  position: fixed;\n  width: 400px;\n  z-index: 1040;\n  top: 100px;\n  left: 25px;\n  border: 1px solid #e5e5e5;\n  background-color: white;\n  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);\n  padding: 20px;\n"])));
 var Main = function Main() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -6331,7 +6331,28 @@ var Main = function Main() {
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
       show = _useState4[0],
-      setShow = _useState4[1];
+      setShow = _useState4[1]; //Pickup parameters
+
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState6 = _slicedToArray(_useState5, 2),
+      type = _useState6[0],
+      setType = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState8 = _slicedToArray(_useState7, 2),
+      weekday = _useState8[0],
+      setWeekday = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState10 = _slicedToArray(_useState9, 2),
+      start = _useState10[0],
+      setStart = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState12 = _slicedToArray(_useState11, 2),
+      end = _useState12[0],
+      setEnd = _useState12[1];
 
   var renderBackdrop = function renderBackdrop(props) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(Backdrop, _objectSpread({}, props));
@@ -6364,7 +6385,48 @@ var Main = function Main() {
         }
       }
     }, _callee, null, [[0, 7]]);
-  })), []);
+  })), [show]);
+
+  var createPickup = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(e) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              e.preventDefault();
+              _context2.prev = 1;
+              _context2.next = 4;
+              return axios__WEBPACK_IMPORTED_MODULE_4___default().post("/api/pickups", {
+                type: type,
+                weekday: weekday,
+                start: start,
+                end: end,
+                user_id: 1
+              });
+
+            case 4:
+              setShow(false);
+              _context2.next = 10;
+              break;
+
+            case 7:
+              _context2.prev = 7;
+              _context2.t0 = _context2["catch"](1);
+              console.error(_context2.t0);
+
+            case 10:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[1, 7]]);
+    }));
+
+    return function createPickup(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
       type: "button",
@@ -6432,7 +6494,7 @@ var Main = function Main() {
           pickup: pickup
         }, pickup.id);
       }
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(CreatePickupModal, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(PickupModal, {
       show: show,
       onHide: function onHide() {
         return setShow(false);
@@ -6444,14 +6506,20 @@ var Main = function Main() {
           id: "modal-label",
           children: "Create new Pickup"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
+          onSubmit: createPickup,
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "type",
             children: "Select type: "
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("select", {
             type: "type",
-            id: "type",
-            name: "type",
+            value: type,
+            onChange: function onChange(e) {
+              return setType(e.target.value);
+            },
+            required: true,
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+              hidden: true
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
               children: "Plastic"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
               children: "Organic"
@@ -6470,22 +6538,63 @@ var Main = function Main() {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
               children: "E-Waste"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+            htmlFor: "weekday",
+            children: "Select day: "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("select", {
+            type: "weekday",
+            value: weekday,
+            onChange: function onChange(e) {
+              return setWeekday(e.target.value);
+            },
+            required: true,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+              hidden: true
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+              value: 0,
+              children: "Monday"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+              value: 1,
+              children: "Tuesday"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+              value: 2,
+              children: "Wednesday"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+              value: 3,
+              children: "Thursday"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+              value: 4,
+              children: "Friday"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+              value: 5,
+              children: "Saturday"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+              value: 6,
+              children: "Sunday"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "start",
             children: "From: "
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
             type: "time",
-            id: "start",
-            name: "start",
+            value: start,
+            onChange: function onChange(e) {
+              return setStart(e.target.value);
+            },
             required: true
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "end",
             children: "To: "
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
             type: "time",
-            id: "end",
-            name: "end",
+            value: end,
+            onChange: function onChange(e) {
+              return setEnd(e.target.value);
+            },
             required: true
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+            type: "submit",
+            value: "Confirm"
           })]
         })]
       })
@@ -6522,6 +6631,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var Pickup = function Pickup(_ref) {
   var pickup = _ref.pickup;
+  var id = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.get)(pickup, 'id', {
+    id: 'Unknown id'
+  });
+  var weekday = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.get)(pickup, 'weekday', {
+    weekday: 'Unknown weekday'
+  });
   var type = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.get)(pickup, 'type', {
     type: 'Unknown type'
   });

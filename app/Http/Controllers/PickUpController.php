@@ -35,7 +35,7 @@ class PickUpController extends Controller
             'end' => 'required',
         ]);
 
-        $request['user_id'] = auth()->id();
+        // $request['user_id'] = auth()->id();
 
         return PickUp::create($request->all());
     }

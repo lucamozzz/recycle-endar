@@ -16,7 +16,7 @@ const Backdrop = styled("div")`
     opacity: 0.5;
     `;
 
-const CreatePickupModal = styled(Modal)`
+const PickupModal = styled(Modal)`
   position: fixed;
   width: 400px;
   z-index: 1040;
@@ -32,6 +32,12 @@ export const Main = () => {
     const [pickups, setPickups] = useState([]);
     const [show, setShow] = useState(false);
 
+    //Pickup parameters
+    const [type, setType] = useState("");
+    const [weekday, setWeekday] = useState("");
+    const [start, setStart] = useState("");
+    const [end, setEnd] = useState("");
+
     const renderBackdrop = (props) => <Backdrop {...props} />;
 
     useEffect(async () => {
@@ -41,7 +47,24 @@ export const Main = () => {
         } catch (error) {
             console.error(error);
         }
-    }, []);
+    }, [show]);
+
+    const createPickup = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.post(`/api/pickups`,
+                {
+                    type: type,
+                    weekday: weekday,
+                    start: start,
+                    end: end,
+                    user_id: 1,
+                });
+            setShow(false);
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     return (
         <div>
@@ -122,7 +145,7 @@ export const Main = () => {
                     }
                 })
             }
-            <CreatePickupModal
+            <PickupModal
                 show={show}
                 onHide={() => setShow(false)}
                 renderBackdrop={renderBackdrop}
@@ -130,9 +153,10 @@ export const Main = () => {
             >
                 <div>
                     <h4 id="modal-label">Create new Pickup</h4>
-                    <form>
+                    <form onSubmit={createPickup}>
                         <label htmlFor="type">Select type: </label>
-                        <select type="type" id="type" name="type">
+                        <select type="type" value={type} onChange={e => setType(e.target.value)} required >
+                            <option hidden></option>
                             <option>Plastic</option>
                             <option>Organic</option>
                             <option>Paper</option>
@@ -142,14 +166,26 @@ export const Main = () => {
                             <option>Light Bulbs</option>
                             <option>Batteries</option>
                             <option>E-Waste</option>
-                        </select>
+                        </select><br />
+                        <label htmlFor="weekday">Select day: </label>
+                        <select type="weekday" value={weekday} onChange={e => setWeekday(e.target.value)} required >
+                            <option hidden></option>
+                            <option value={0}>Monday</option>
+                            <option value={1}>Tuesday</option>
+                            <option value={2}>Wednesday</option>
+                            <option value={3}>Thursday</option>
+                            <option value={4}>Friday</option>
+                            <option value={5}>Saturday</option>
+                            <option value={6}>Sunday</option>
+                        </select><br />
                         <label htmlFor="start">From: </label>
-                        <input type="time" id="start" name="start" required />
+                        <input type="time" value={start} onChange={e => setStart(e.target.value)} required />
                         <label htmlFor="end">To: </label>
-                        <input type="time" id="end" name="end" required />
+                        <input type="time" value={end} onChange={e => setEnd(e.target.value)} required /><br />
+                        <input type="submit" value="Confirm" />
                     </form>
                 </div>
-            </CreatePickupModal>
+            </PickupModal>
         </div>
     )
 }

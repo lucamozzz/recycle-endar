@@ -17,16 +17,16 @@ const Backdrop = styled("div")`
     `;
 
 const PickupModal = styled(Modal)`
-  position: fixed;
-  width: 400px;
-  z-index: 1040;
-  top: 100px;
-  left: 25px;
-  border: 1px solid #e5e5e5;
-  background-color: white;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-  padding: 20px;
-`;
+    position: fixed;
+    width: 400px;
+    z-index: 1040;
+    top: 100px;
+    left: 25px;
+    border: 1px solid #e5e5e5;
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    `;
 
 export const Main = () => {
     const [pickups, setPickups] = useState([]);
@@ -80,7 +80,7 @@ export const Main = () => {
                 pickups.map(pickup => {
                     if (pickup.weekday == 0) {
                         return (
-                            <Pickup key={pickup.id} pickup={pickup} onClick={() => setShow(!show)} />
+                            <Pickup key={pickup.id} pickup={pickup} />
                         )
                     }
                 })

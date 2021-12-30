@@ -6321,7 +6321,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 var Backdrop = (0,styled_components__WEBPACK_IMPORTED_MODULE_6__["default"])("div")(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    position: fixed;\n    z-index: 1040;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    background-color: #000;\n    opacity: 0.5;\n    "])));
-var PickupModal = (0,styled_components__WEBPACK_IMPORTED_MODULE_6__["default"])(react_overlays_Modal__WEBPACK_IMPORTED_MODULE_7__["default"])(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  position: fixed;\n  width: 400px;\n  z-index: 1040;\n  top: 100px;\n  left: 25px;\n  border: 1px solid #e5e5e5;\n  background-color: white;\n  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);\n  padding: 20px;\n"])));
+var PickupModal = (0,styled_components__WEBPACK_IMPORTED_MODULE_6__["default"])(react_overlays_Modal__WEBPACK_IMPORTED_MODULE_7__["default"])(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: fixed;\n    width: 400px;\n    z-index: 1040;\n    top: 100px;\n    left: 25px;\n    border: 1px solid #e5e5e5;\n    background-color: white;\n    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);\n    padding: 20px;\n    "])));
 var Main = function Main() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -6440,10 +6440,7 @@ var Main = function Main() {
     }), pickups.map(function (pickup) {
       if (pickup.weekday == 0) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pickup__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          pickup: pickup,
-          onClick: function onClick() {
-            return setShow(!show);
-          }
+          pickup: pickup
         }, pickup.id);
       }
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
@@ -6621,36 +6618,80 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Pickup": () => (/* binding */ Pickup),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
 
 var Pickup = function Pickup(_ref) {
   var pickup = _ref.pickup;
-  var id = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.get)(pickup, 'id', {
+  var id = (0,lodash__WEBPACK_IMPORTED_MODULE_2__.get)(pickup, 'id', {
     id: 'Unknown id'
   });
-  var weekday = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.get)(pickup, 'weekday', {
+  var weekday = (0,lodash__WEBPACK_IMPORTED_MODULE_2__.get)(pickup, 'weekday', {
     weekday: 'Unknown weekday'
   });
-  var type = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.get)(pickup, 'type', {
+  var type = (0,lodash__WEBPACK_IMPORTED_MODULE_2__.get)(pickup, 'type', {
     type: 'Unknown type'
   });
-  var start = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.get)(pickup, 'start', {
+  var start = (0,lodash__WEBPACK_IMPORTED_MODULE_2__.get)(pickup, 'start', {
     start: 'xx:xx'
   });
-  var end = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.get)(pickup, 'end', {
+  var end = (0,lodash__WEBPACK_IMPORTED_MODULE_2__.get)(pickup, 'end', {
     end: 'xx:xx'
   });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
+
+  var deletePickup = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return axios["delete"]("api/pickups/".concat(id));
+
+            case 3:
+              _context.next = 8;
+              break;
+
+            case 5:
+              _context.prev = 5;
+              _context.t0 = _context["catch"](0);
+              console.error(_context.t0);
+
+            case 8:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 5]]);
+    }));
+
+    return function deletePickup() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
       children: type
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h5", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h5", {
       children: [start.slice(0, 5), " - ", end.slice(0, 5)]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+      onClick: deletePickup,
+      children: "X"
     })]
   });
 };

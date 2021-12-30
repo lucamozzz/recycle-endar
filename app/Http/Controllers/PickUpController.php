@@ -79,12 +79,14 @@ class PickUpController extends Controller
      */
     public function destroy($id)
     {
-        return auth()
-            ->user()
-            ->pickups
-            ->where('id', $id)
-            ->first()
-            ->destroy($id);
+        // return auth()
+        //     ->user()
+        //     ->pickups
+        //     ->where('id', $id)
+        //     ->first()
+        //     ->destroy($id);
+
+        PickUp::destroy($id);
     }
 
     /**

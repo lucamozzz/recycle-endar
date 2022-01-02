@@ -5,6 +5,7 @@ import Pickup from './Pickup';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
+//Shadow effect when modal appears
 const Backdrop = styled("div")`
     position: fixed;
     z-index: 1040;
@@ -16,6 +17,7 @@ const Backdrop = styled("div")`
     opacity: 0.5;
     `;
 
+//Modal style
 const PickupModal = styled(Modal)`
     position: fixed;
     width: 400px;
@@ -29,25 +31,26 @@ const PickupModal = styled(Modal)`
     `;
 
 export const Main = () => {
-    const [pickups, setPickups] = useState([]);
-    const [show, setShow] = useState(false);
-
     //Pickup parameters
     const [type, setType] = useState("");
     const [weekday, setWeekday] = useState("");
     const [start, setStart] = useState("");
     const [end, setEnd] = useState("");
 
-    const renderBackdrop = (props) => <Backdrop {...props} />;
-
-    useEffect(async () => {
+    const loadPickups = async () => {
         try {
             const data = await axios(`/api/pickups`);
             setPickups(data.data);
         } catch (error) {
             console.error(error);
         }
-    }, [show]);
+    };
+
+    //Pickups list
+    const [pickups, setPickups] = useState([]);
+
+    //Pickups count
+    const [count, setCount] = useState(0);
 
     const createPickup = async (e) => {
         e.preventDefault();
@@ -61,10 +64,28 @@ export const Main = () => {
                     user_id: 1,
                 });
             setShow(false);
+            setCount(count + 1);
         } catch (error) {
             console.error(error);
         }
     }
+
+    const deletePickup = async (id) => {
+        try {
+            await axios.delete(`api/pickups/${id}`);
+            setCount(count - 1);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    //Modal show setting
+    const [show, setShow] = useState(false);
+    const renderBackdrop = (props) => <Backdrop {...props} />;
+
+    //Reload pickups everytime the count value changes
+    useEffect(loadPickups,
+        [count]);
 
     return (
         <div>
@@ -80,7 +101,7 @@ export const Main = () => {
                 pickups.map(pickup => {
                     if (pickup.weekday == 0) {
                         return (
-                            <Pickup key={pickup.id} pickup={pickup} />
+                            <Pickup key={pickup.id} pickup={pickup} del={deletePickup} />
                         )
                     }
                 })
@@ -90,7 +111,7 @@ export const Main = () => {
                 pickups.map(pickup => {
                     if (pickup.weekday == 1) {
                         return (
-                            <Pickup key={pickup.id} pickup={pickup} />
+                            <Pickup key={pickup.id} pickup={pickup} del={deletePickup} />
                         )
                     }
                 })
@@ -100,7 +121,7 @@ export const Main = () => {
                 pickups.map(pickup => {
                     if (pickup.weekday == 2) {
                         return (
-                            <Pickup key={pickup.id} pickup={pickup} />
+                            <Pickup key={pickup.id} pickup={pickup} del={deletePickup} />
                         )
                     }
                 })
@@ -110,7 +131,7 @@ export const Main = () => {
                 pickups.map(pickup => {
                     if (pickup.weekday == 3) {
                         return (
-                            <Pickup key={pickup.id} pickup={pickup} />
+                            <Pickup key={pickup.id} pickup={pickup} del={deletePickup} />
                         )
                     }
                 })
@@ -120,7 +141,7 @@ export const Main = () => {
                 pickups.map(pickup => {
                     if (pickup.weekday == 4) {
                         return (
-                            <Pickup key={pickup.id} pickup={pickup} />
+                            <Pickup key={pickup.id} pickup={pickup} del={deletePickup} />
                         )
                     }
                 })
@@ -130,7 +151,7 @@ export const Main = () => {
                 pickups.map(pickup => {
                     if (pickup.weekday == 5) {
                         return (
-                            <Pickup key={pickup.id} pickup={pickup} />
+                            <Pickup key={pickup.id} pickup={pickup} del={deletePickup} />
                         )
                     }
                 })
@@ -140,7 +161,7 @@ export const Main = () => {
                 pickups.map(pickup => {
                     if (pickup.weekday == 6) {
                         return (
-                            <Pickup key={pickup.id} pickup={pickup} />
+                            <Pickup key={pickup.id} pickup={pickup} del={deletePickup} />
                         )
                     }
                 })

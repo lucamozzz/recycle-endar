@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::resource('pickups', PickUpController::class);
-Route::get('/pickups/search/{weekday}', [PickUpController::class, 'search']);
-Route::post('/logout', [AuthController::class, 'logout']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::resource('pickups', PickUpController::class);
+    Route::get('/pickups/search/{weekday}', [PickUpController::class, 'search']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 });

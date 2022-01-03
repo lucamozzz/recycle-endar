@@ -14,10 +14,9 @@ class PickUpController extends Controller
      */
     public function index()
     {
-        // return auth()
-        //     ->user()
-        //     ->pickups;
-        return Pickup::all();
+        return auth()
+            ->user()
+            ->pickups;
     }
 
     /**
@@ -79,14 +78,12 @@ class PickUpController extends Controller
      */
     public function destroy($id)
     {
-        // return auth()
-        //     ->user()
-        //     ->pickups
-        //     ->where('id', $id)
-        //     ->first()
-        //     ->destroy($id);
-
-        PickUp::destroy($id);
+        return auth()
+            ->user()
+            ->pickups
+            ->where('id', $id)
+            ->first()
+            ->destroy($id);
     }
 
     /**

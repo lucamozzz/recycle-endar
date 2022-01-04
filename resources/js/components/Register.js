@@ -1,5 +1,6 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { FormContainer } from './style';
 
 export const Register = ({ setUser }) => {
     const [username, setUsername] = useState('');
@@ -25,20 +26,16 @@ export const Register = ({ setUser }) => {
     }
 
     return (
-        <div>
+        <FormContainer>
             <h3>Register</h3>
             <form onSubmit={e => { handleSubmit(e) }}>
-                <label htmlFor="username" required>Username</label>
-                <input type="text" name='username' value={username} onChange={e => setUsername(e.target.value)} required /><br />
-                <label htmlFor="email">Email</label>
-                <input type="text" name='email' value={email} onChange={e => setEmail(e.target.value)} required /><br />
-                <label htmlFor="password">Password</label>
-                <input type="password" name='password' value={password} onChange={e => setPassword(e.target.value)} required /><br />
-                <label htmlFor="password_confirmation">Password confirmation</label>
-                <input type="password" name='password_confirmation' value={confirmation} onChange={e => setConfirmation(e.target.value)} required /><br />
-                <input type="submit" value='Register' />
+                <input className="form-control" placeholder='Username' type="text" name='username' value={username} onChange={e => setUsername(e.target.value)} required /><br />
+                <input className="form-control" placeholder='Email' type="text" name='email' value={email} onChange={e => setEmail(e.target.value)} required /><br />
+                <input className="form-control" placeholder='Password' type="password" name='password' value={password} onChange={e => setPassword(e.target.value)} required /><br />
+                <input className="form-control" placeholder='Password confirmation' type="password" name='password_confirmation' value={confirmation} onChange={e => setConfirmation(e.target.value)} required /><br />
+                <input className="btn btn-primary" type="submit" value='Register' />
             </form>
-        </div>
+        </FormContainer>
     )
 }
 

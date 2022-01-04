@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { AppContainer } from './style';
 import Calendar from './Calendar';
 import Register from './Register';
 import Login from './Login';
@@ -11,26 +12,24 @@ export const Main = () => {
     useEffect(() => {
         if (user != undefined) {
             setComponent(
-                <div>
+                <AppContainer>
                     <Calendar loggedUser={user} />
-                </div>
+                </AppContainer>
             )
         } else {
             setComponent(
-                <div>
+                <AppContainer>
                     <Login setUser={setUser} />
                     <Register setUser={setUser} />
-                </div>
+                </AppContainer>
             )
         }
     }, [user]);
 
     return (
-        <div>
-            {
-                component
-            }
-        </div>
+        <>
+            {component}
+        </>
     )
 }
 

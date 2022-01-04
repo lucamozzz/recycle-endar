@@ -1,5 +1,6 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { FormContainer } from './style';
 
 export const Login = ({ setUser }) => {
     const [email, setEmail] = useState('');
@@ -21,16 +22,30 @@ export const Login = ({ setUser }) => {
     }
 
     return (
-        <div>
+        <FormContainer>
             <h3>Login</h3>
-            <form onSubmit={e => { handleSubmit(e) }}>
-                <label htmlFor="email">Email</label>
-                <input type="text" name='email' value={email} onChange={e => setEmail(e.target.value)} required /><br />
-                <label htmlFor="password">Password</label>
-                <input type="password" name='password' value={password} onChange={e => setPassword(e.target.value)} required /><br />
-                <input type="submit" value='Login' />
+            <form onSubmit={handleSubmit}>
+                <input
+                    className='form-control'
+                    type="text"
+                    name='email'
+                    placeholder='Email'
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    required
+                /><br />
+                <input
+                    className='form-control'
+                    type="password"
+                    name='password'
+                    placeholder='Password'
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    required
+                /><br />
+                <input className="btn btn-primary" type="submit" value='Login' />
             </form>
-        </div>
+        </FormContainer>
     )
 }
 

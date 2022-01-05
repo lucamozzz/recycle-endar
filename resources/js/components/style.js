@@ -16,6 +16,9 @@ export const PickupsContainer = styled.div`
     align-items: flex-start;
     overflow-x: auto;
     overflow-y: hidden;
+    margin-right: var(--bs-gutter-x,-1.5rem);
+    margin-left: var(--bs-gutter-x,-1.5rem);
+    margin-bottom: 1em;
 `;
 
 //Pickup blue-bordered container
@@ -56,7 +59,10 @@ export const PickupModal = styled(Modal)`
 
 export const AddPickupButton = styled.button`
     font-size: 1em;
-    width: 100%;
+    width: 90%;
     max-width: 20em;
-    margin: 1em 0;
+    margin: 1em;
+    position: fixed;
+    bottom: 0;
+    right: 0;
 `;

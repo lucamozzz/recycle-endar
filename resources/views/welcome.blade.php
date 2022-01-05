@@ -11,7 +11,8 @@
 </head>
 
 <body>
-    <h2 class="h1" style="text-align: center">Recycle-endar</h2>
+    <h2 class="h1" style="text-align: center; padding-top: 0.3em;">♻️ Recycle-endar 📅</h2>
+    <hr>
     <div id="root"></div>
     <script src="{{mix('js/app.js')}}"></script>
 </body>

@@ -6278,7 +6278,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style */ "./resources/js/components/style.js");
-/* harmony import */ var _Pickup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Pickup */ "./resources/js/components/Pickup.js");
+/* harmony import */ var _Wday__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Wday */ "./resources/js/components/Wday.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
@@ -6312,6 +6312,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+var wdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 var Calendar = function Calendar(_ref) {
   var loggedUser = _ref.loggedUser;
 
@@ -6493,86 +6494,20 @@ var Calendar = function Calendar(_ref) {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(loadPickups, [count]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "container-md",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    style: {
+      marginBottom: '4em'
+    },
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "container",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
-        children: "Monday"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.PickupsContainer, {
-        children: pickups.map(function (pickup) {
-          if (pickup.weekday == 0) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pickup__WEBPACK_IMPORTED_MODULE_3__["default"], {
-              pickup: pickup,
-              del: deletePickup
-            }, pickup.id);
-          }
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
-        children: "Tuesday"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.PickupsContainer, {
-        children: pickups.map(function (pickup) {
-          if (pickup.weekday == 1) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pickup__WEBPACK_IMPORTED_MODULE_3__["default"], {
-              pickup: pickup,
-              del: deletePickup
-            }, pickup.id);
-          }
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
-        children: "Wednesday"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.PickupsContainer, {
-        children: pickups.map(function (pickup) {
-          if (pickup.weekday == 2) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pickup__WEBPACK_IMPORTED_MODULE_3__["default"], {
-              pickup: pickup,
-              del: deletePickup
-            }, pickup.id);
-          }
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
-        children: "Thursday"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.PickupsContainer, {
-        children: pickups.map(function (pickup) {
-          if (pickup.weekday == 3) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pickup__WEBPACK_IMPORTED_MODULE_3__["default"], {
-              pickup: pickup,
-              del: deletePickup
-            }, pickup.id);
-          }
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
-        children: "Friday"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.PickupsContainer, {
-        children: pickups.map(function (pickup) {
-          if (pickup.weekday == 4) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pickup__WEBPACK_IMPORTED_MODULE_3__["default"], {
-              pickup: pickup,
-              del: deletePickup
-            }, pickup.id);
-          }
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
-        children: "Saturday"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.PickupsContainer, {
-        children: pickups.map(function (pickup) {
-          if (pickup.weekday == 5) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pickup__WEBPACK_IMPORTED_MODULE_3__["default"], {
-              pickup: pickup,
-              del: deletePickup
-            }, pickup.id);
-          }
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
-        children: "Sunday"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.PickupsContainer, {
-        children: pickups.map(function (pickup) {
-          if (pickup.weekday == 6) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pickup__WEBPACK_IMPORTED_MODULE_3__["default"], {
-              pickup: pickup,
-              del: deletePickup
-            }, pickup.id);
-          }
-        })
-      })]
+      children: wdays.map(function (wday) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Wday__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          day: wday,
+          pickups: pickups.filter(function (pickup) {
+            return pickup.weekday == wdays.indexOf(wday);
+          }),
+          del: deletePickup
+        }, wdays.indexOf(wday));
+      })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.AddPickupButton, {
       type: "button",
       className: "btn btn-primary",
@@ -7147,6 +7082,63 @@ var Register = function Register(_ref) {
 
 /***/ }),
 
+/***/ "./resources/js/components/Wday.js":
+/*!*****************************************!*\
+  !*** ./resources/js/components/Wday.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Wday": () => (/* binding */ Wday),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style */ "./resources/js/components/style.js");
+/* harmony import */ var _Pickup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Pickup */ "./resources/js/components/Pickup.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+var h3Style = {};
+var Wday = function Wday(_ref) {
+  var day = _ref.day,
+      pickups = _ref.pickups,
+      del = _ref.del;
+
+  if (pickups.length == 0) {
+    h3Style = {
+      marginBottom: '-0.5em',
+      opacity: '50%'
+    };
+  } else {
+    h3Style = {
+      marginBottom: '-0.5em'
+    };
+  }
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+      style: h3Style,
+      children: day
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_style__WEBPACK_IMPORTED_MODULE_1__.PickupsContainer, {
+      children: pickups.map(function (pickup) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Pickup__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          pickup: pickup,
+          del: del
+        }, pickup.id);
+      })
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Wday);
+
+/***/ }),
+
 /***/ "./resources/js/components/style.js":
 /*!******************************************!*\
   !*** ./resources/js/components/style.js ***!
@@ -7174,14 +7166,14 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 var AppContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    margin: auto;\n"])));
 var FormContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    margin: auto;\n    max-width: 400px;\n    padding: 1em;\n"])));
-var PickupsContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n    align-items: flex-start;\n    overflow-x: auto;\n    overflow-y: hidden;\n"]))); //Pickup blue-bordered container
+var PickupsContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n    align-items: flex-start;\n    overflow-x: auto;\n    overflow-y: hidden;\n    margin-right: var(--bs-gutter-x,-1.5rem);\n    margin-left: var(--bs-gutter-x,-1.5rem);\n    margin-bottom: 1em;\n"]))); //Pickup blue-bordered container
 
 var SinglePickupContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    border: 4px solid #0d6efd;\n    border-radius: 10px;\n    margin: 1em;\n    min-width: 12em;\n    padding-right: 0.1em;\n    padding-top: 0.4em;\n"]))); //Shadow effect when modal appears
 
 var Backdrop = (0,styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])('div')(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    position: fixed;\n    z-index: 1040;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    background-color: #000;\n    opacity: 0.5;\n"]))); //Modal style
 
 var PickupModal = (0,styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(react_overlays_Modal__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    position: fixed;\n    width: 400px;\n    z-index: 1040;\n    top: 100px;\n    left: 25px;\n    border: 1px solid #e5e5e5;\n    background-color: white;\n    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);\n    padding: 20px;\n    border-radius: 17px;\n"])));
-var AddPickupButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    font-size: 1em;\n    width: 100%;\n    max-width: 20em;\n    margin: 1em 0;\n"])));
+var AddPickupButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    font-size: 1em;\n    width: 90%;\n    max-width: 20em;\n    margin: 1em;\n    position: fixed;\n    bottom: 0;\n    right: 0;\n"])));
 
 /***/ }),
 

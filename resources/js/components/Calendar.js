@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Backdrop, PickupModal, PickupsContainer, AddPickupButton } from './style';
-import Pickup from './Pickup';
+import { Backdrop, PickupModal, AddPickupButton } from './style';
+import Wday from './Wday';
 import axios from 'axios';
+
+const wdays = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+]
 
 export const Calendar = ({ loggedUser }) => {
     //Pickup parameters
@@ -76,92 +86,28 @@ export const Calendar = ({ loggedUser }) => {
         [count]);
 
     return (
-        <div className='container-md'>
+        <div className='container-md' style={{ marginBottom: '4em' }}>
             <div className='container'>
-                <h3>Monday</h3>
-                <PickupsContainer>
-                    {
-                        pickups.map(pickup => {
-                            if (pickup.weekday == 0) {
+                {
+                    wdays
+                        .map(
+                            (wday) => {
                                 return (
-                                    <Pickup key={pickup.id} pickup={pickup} del={deletePickup} />
+                                    <Wday
+                                        key={wdays.indexOf(wday)}
+                                        day={wday}
+                                        pickups={
+                                            pickups
+                                                .filter(
+                                                    pickup => pickup.weekday == wdays.indexOf(wday)
+                                                )
+                                        }
+                                        del={deletePickup}
+                                    />
                                 )
                             }
-                        })
-                    }
-                </PickupsContainer>
-                <h3>Tuesday</h3>
-                <PickupsContainer>
-                    {
-                        pickups.map(pickup => {
-                            if (pickup.weekday == 1) {
-                                return (
-                                    <Pickup key={pickup.id} pickup={pickup} del={deletePickup} />
-                                )
-                            }
-                        })
-                    }
-                </PickupsContainer>
-                <h3>Wednesday</h3>
-                <PickupsContainer>
-                    {
-                        pickups.map(pickup => {
-                            if (pickup.weekday == 2) {
-                                return (
-                                    <Pickup key={pickup.id} pickup={pickup} del={deletePickup} />
-                                )
-                            }
-                        })
-                    }
-                </PickupsContainer>
-                <h3>Thursday</h3>
-                <PickupsContainer>
-                    {
-                        pickups.map(pickup => {
-                            if (pickup.weekday == 3) {
-                                return (
-                                    <Pickup key={pickup.id} pickup={pickup} del={deletePickup} />
-                                )
-                            }
-                        })
-                    }
-                </PickupsContainer>
-                <h3>Friday</h3>
-                <PickupsContainer>
-                    {
-                        pickups.map(pickup => {
-                            if (pickup.weekday == 4) {
-                                return (
-                                    <Pickup key={pickup.id} pickup={pickup} del={deletePickup} />
-                                )
-                            }
-                        })
-                    }
-                </PickupsContainer>
-                <h3>Saturday</h3>
-                <PickupsContainer>
-                    {
-                        pickups.map(pickup => {
-                            if (pickup.weekday == 5) {
-                                return (
-                                    <Pickup key={pickup.id} pickup={pickup} del={deletePickup} />
-                                )
-                            }
-                        })
-                    }
-                </PickupsContainer>
-                <h3>Sunday</h3>
-                <PickupsContainer>
-                    {
-                        pickups.map(pickup => {
-                            if (pickup.weekday == 6) {
-                                return (
-                                    <Pickup key={pickup.id} pickup={pickup} del={deletePickup} />
-                                )
-                            }
-                        })
-                    }
-                </PickupsContainer>
+                        )
+                }
             </div>
             <AddPickupButton
                 type="button"

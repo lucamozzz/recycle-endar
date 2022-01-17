@@ -19,9 +19,6 @@ export const PickupsContainer = styled.div`
     margin-right: var(--bs-gutter-x,-1.5rem);
     margin-left: var(--bs-gutter-x,-1.5rem);
     margin-bottom: 1em;
-    ${'' /* &::-webkit-scrollbar{
-        display: none;
-    } */}
 `;
 
 //Pickup blue-bordered container
@@ -29,6 +26,7 @@ export const SinglePickupContainer = styled.div`
     ${'' /* border: 4px solid #0d6efd; */}
     border-radius: 10px;
     margin: 1em;
+    margin-right: -0.5em;
     min-width: 12em;
     max-width: 22vw;
     padding-right: 0.1em;
@@ -74,8 +72,8 @@ export const PickupModal = styled(Modal)`
     width: 90vw;
     max-width: 30em;
     z-index: 1040;
-    top: 120px;
-    left: 5vw;
+    top: 140px;
+    right: 5vw;
     border: 1px solid #e5e5e5;
     background-color: white;
     box-shadow: 0 5px 15px rgb(0 0 0 / 50%);
@@ -95,6 +93,7 @@ export const AddPickupButton = styled.button`
     border: 3px solid black;
     color: black;
     font-weight: bold;
+    box-shadow: none;
     @media (max-width: 768px) {
         margin: 1.3em;
     }
@@ -102,5 +101,12 @@ export const AddPickupButton = styled.button`
         border-color: black;
         color: white;
         background-color: black;
+        box-shadow: none;
+    }
+    &:focus {
+        border-color: black;
+        color: black;
+        background-color: white;
+        box-shadow: none;
     }
 `;

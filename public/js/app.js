@@ -6497,7 +6497,14 @@ var Calendar = function Calendar(_ref) {
     style: {
       marginBottom: '4em'
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.AddPickupButton, {
+      type: "button",
+      className: "btn btn-primary",
+      onClick: function onClick() {
+        return setShow(true);
+      },
+      children: "+"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "container",
       children: wdays.map(function (wday) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Wday__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -6508,13 +6515,6 @@ var Calendar = function Calendar(_ref) {
           del: deletePickup
         }, wdays.indexOf(wday));
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.AddPickupButton, {
-      type: "button",
-      className: "btn btn-primary",
-      onClick: function onClick() {
-        return setShow(true);
-      },
-      children: "Add Pickup"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.PickupModal, {
       show: show,
       onHide: function onHide() {
@@ -6891,13 +6891,25 @@ var Pickup = function Pickup(_ref) {
   var end = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.get)(pickup, 'end', {
     end: 'xx:xx'
   });
+  var colors = {
+    Plastic: '#F36838',
+    Organic: '#88685D',
+    Paper: '#4DED30',
+    Glass: '#5ED9FF',
+    Metal: '#057E87',
+    Clothes: '#FFB6C1',
+    'Light Bulbs': '#F6DA36',
+    Batteries: '#15D5B0',
+    'E-Waste': '#9751B4'
+  };
+  var border = {
+    border: '4px solid ' + colors[type],
+    backgroundColor: colors[type] + '50'
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_2__.SinglePickupContainer, {
+    style: border,
     className: "container",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-      style: {
-        "float": 'right'
-      },
-      className: "btn-close",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.CloseButton, {
       onClick: function onClick() {
         return del(id);
       }
@@ -7112,12 +7124,14 @@ var Wday = function Wday(_ref) {
 
   if (pickups.length == 0) {
     h3Style = {
-      marginBottom: '-0.5em',
-      opacity: '50%'
+      marginBottom: '-0.4em',
+      opacity: '50%',
+      fontSize: '2em'
     };
   } else {
     h3Style = {
-      marginBottom: '-0.5em'
+      marginBottom: '-0.4em',
+      fontSize: '2em'
     };
   }
 
@@ -7152,13 +7166,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "FormContainer": () => (/* binding */ FormContainer),
 /* harmony export */   "PickupsContainer": () => (/* binding */ PickupsContainer),
 /* harmony export */   "SinglePickupContainer": () => (/* binding */ SinglePickupContainer),
+/* harmony export */   "CloseButton": () => (/* binding */ CloseButton),
 /* harmony export */   "Backdrop": () => (/* binding */ Backdrop),
 /* harmony export */   "PickupModal": () => (/* binding */ PickupModal),
 /* harmony export */   "AddPickupButton": () => (/* binding */ AddPickupButton)
 /* harmony export */ });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 /* harmony import */ var react_overlays_Modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-overlays/Modal */ "./node_modules/react-overlays/esm/Modal.js");
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -7166,14 +7181,21 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 var AppContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    margin: auto;\n"])));
 var FormContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    margin: auto;\n    max-width: 400px;\n    padding: 1em;\n"])));
-var PickupsContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n    align-items: flex-start;\n    overflow-x: auto;\n    overflow-y: hidden;\n    margin-right: var(--bs-gutter-x,-1.5rem);\n    margin-left: var(--bs-gutter-x,-1.5rem);\n    margin-bottom: 1em;\n"]))); //Pickup blue-bordered container
+var PickupsContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n    align-items: flex-start;\n    overflow-x: auto;\n    overflow-y: hidden;\n    margin-right: var(--bs-gutter-x,-1.5rem);\n    margin-left: var(--bs-gutter-x,-1.5rem);\n    margin-bottom: 1em;\n    ", "\n"])), ''
+/* &::-webkit-scrollbar{
+display: none;
+} */
+); //Pickup blue-bordered container
 
-var SinglePickupContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    border: 4px solid #0d6efd;\n    border-radius: 10px;\n    margin: 1em;\n    min-width: 12em;\n    padding-right: 0.1em;\n    padding-top: 0.4em;\n"]))); //Shadow effect when modal appears
+var SinglePickupContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    ", "\n    border-radius: 10px;\n    margin: 1em;\n    min-width: 12em;\n    max-width: 22vw;\n    padding-right: 0.1em;\n    padding-top: 0.4em;\n"])), ''
+/* border: 4px solid #0d6efd; */
+);
+var CloseButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    float: right;\n    position: relative;\n    bottom: 1.1rem;\n    left: 0.7rem;\n    display: none;\n    border: none;\n    background-color: red;\n    color: white;\n    width: 1.2rem;\n    height: 1.2rem;\n    border-radius: 20px;\n    line-height: 0;\n    ", ":hover & {\n        display: unset;\n    }\n    &:before{\n        content: '-';\n    }\n"])), SinglePickupContainer); //Shadow effect when modal appears
 
-var Backdrop = (0,styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])('div')(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    position: fixed;\n    z-index: 1040;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    background-color: #000;\n    opacity: 0.5;\n"]))); //Modal style
+var Backdrop = (0,styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])('div')(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    position: fixed;\n    z-index: 1040;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    background-color: #000;\n    opacity: 0.5;\n"]))); //Modal style
 
-var PickupModal = (0,styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(react_overlays_Modal__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    position: fixed;\n    width: 400px;\n    z-index: 1040;\n    top: 100px;\n    left: 25px;\n    border: 1px solid #e5e5e5;\n    background-color: white;\n    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);\n    padding: 20px;\n    border-radius: 17px;\n"])));
-var AddPickupButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    font-size: 1em;\n    width: 90%;\n    max-width: 20em;\n    margin: 1em;\n    position: fixed;\n    bottom: 0;\n    right: 0;\n"])));
+var PickupModal = (0,styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(react_overlays_Modal__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    position: fixed;\n    width: 90vw;\n    max-width: 30em;\n    z-index: 1040;\n    top: 120px;\n    left: 5vw;\n    border: 1px solid #e5e5e5;\n    background-color: white;\n    box-shadow: 0 5px 15px rgb(0 0 0 / 50%);\n    padding: 20px;\n    border-radius: 17px;\n"])));
+var AddPickupButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    background-color: white;\n    margin: 2.3em;\n    position: fixed;\n    top: 0;\n    right: 0;\n    z-index: 1;\n    border-radius: 20px;\n    width: 18vw;\n    border: 3px solid black;\n    color: black;\n    font-weight: bold;\n    @media (max-width: 768px) {\n        margin: 1.3em;\n    }\n    &:hover {\n        border-color: black;\n        color: white;\n        background-color: black;\n    }\n"])));
 
 /***/ }),
 

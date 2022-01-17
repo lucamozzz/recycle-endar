@@ -19,16 +19,41 @@ export const PickupsContainer = styled.div`
     margin-right: var(--bs-gutter-x,-1.5rem);
     margin-left: var(--bs-gutter-x,-1.5rem);
     margin-bottom: 1em;
+    ${'' /* &::-webkit-scrollbar{
+        display: none;
+    } */}
 `;
 
 //Pickup blue-bordered container
 export const SinglePickupContainer = styled.div`
-    border: 4px solid #0d6efd;
+    ${'' /* border: 4px solid #0d6efd; */}
     border-radius: 10px;
     margin: 1em;
     min-width: 12em;
+    max-width: 22vw;
     padding-right: 0.1em;
     padding-top: 0.4em;
+`;
+
+export const CloseButton = styled.button`
+    float: right;
+    position: relative;
+    bottom: 1.1rem;
+    left: 0.7rem;
+    display: none;
+    border: none;
+    background-color: red;
+    color: white;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 20px;
+    line-height: 0;
+    ${SinglePickupContainer}:hover & {
+        display: unset;
+    }
+    &:before{
+        content: '-';
+    }
 `;
 
 //Shadow effect when modal appears
@@ -46,23 +71,36 @@ export const Backdrop = styled('div')`
 //Modal style
 export const PickupModal = styled(Modal)`
     position: fixed;
-    width: 400px;
+    width: 90vw;
+    max-width: 30em;
     z-index: 1040;
-    top: 100px;
-    left: 25px;
+    top: 120px;
+    left: 5vw;
     border: 1px solid #e5e5e5;
     background-color: white;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 15px rgb(0 0 0 / 50%);
     padding: 20px;
     border-radius: 17px;
 `;
 
 export const AddPickupButton = styled.button`
-    font-size: 1em;
-    width: 90%;
-    max-width: 20em;
-    margin: 1em;
+    background-color: white;
+    margin: 2.3em;
     position: fixed;
-    bottom: 0;
+    top: 0;
     right: 0;
+    z-index: 1;
+    border-radius: 20px;
+    width: 18vw;
+    border: 3px solid black;
+    color: black;
+    font-weight: bold;
+    @media (max-width: 768px) {
+        margin: 1.3em;
+    }
+    &:hover {
+        border-color: black;
+        color: white;
+        background-color: black;
+    }
 `;

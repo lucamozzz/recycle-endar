@@ -8,12 +8,14 @@ export const Wday = ({ day, pickups, del }) => {
 
     if (pickups.length == 0) {
         h3Style = {
-            marginBottom: '-0.5em',
+            marginBottom: '-0.4em',
             opacity: '50%',
+            fontSize: '2em',
         }
     } else {
         h3Style = {
-            marginBottom: '-0.5em',
+            marginBottom: '-0.4em',
+            fontSize: '2em',
         }
     }
 

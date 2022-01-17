@@ -87,6 +87,13 @@ export const Calendar = ({ loggedUser }) => {
 
     return (
         <div className='container-md' style={{ marginBottom: '4em' }}>
+            <AddPickupButton
+                type="button"
+                className="btn btn-primary"
+                onClick={() => setShow(true)}
+            >
+                +
+            </AddPickupButton>
             <div className='container'>
                 {
                     wdays
@@ -109,13 +116,6 @@ export const Calendar = ({ loggedUser }) => {
                         )
                 }
             </div>
-            <AddPickupButton
-                type="button"
-                className="btn btn-primary"
-                onClick={() => setShow(true)}
-            >
-                Add Pickup
-            </AddPickupButton>
             <PickupModal
                 show={show}
                 onHide={() => setShow(false)}

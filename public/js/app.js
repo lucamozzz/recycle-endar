@@ -6390,13 +6390,22 @@ var Calendar = function Calendar(_ref) {
   var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState14 = _slicedToArray(_useState13, 2),
       pickups = _useState14[0],
-      setPickups = _useState14[1]; //Pickups count
+      setPickups = _useState14[1]; //Displayed pickups
 
 
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState16 = _slicedToArray(_useState15, 2),
-      count = _useState16[0],
-      setCount = _useState16[1];
+      visiblePickups = _useState16[0],
+      setVisiblePickups = _useState16[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    setVisiblePickups(pickups);
+  }, [pickups]); //Pickups count
+
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState18 = _slicedToArray(_useState17, 2),
+      count = _useState18[0],
+      setCount = _useState18[1];
 
   var createPickup = /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(e) {
@@ -6481,10 +6490,10 @@ var Calendar = function Calendar(_ref) {
   }(); //Modal show setting
 
 
-  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-      _useState18 = _slicedToArray(_useState17, 2),
-      show = _useState18[0],
-      setShow = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState20 = _slicedToArray(_useState19, 2),
+      show = _useState20[0],
+      setShow = _useState20[1];
 
   var renderBackdrop = function renderBackdrop(props) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.Backdrop, _objectSpread({}, props));
@@ -6492,12 +6501,29 @@ var Calendar = function Calendar(_ref) {
 
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(loadPickups, [count]);
+
+  var search = function search(event) {
+    var key = event.target.value.toLowerCase();
+
+    if (key == '') {
+      setVisiblePickups(pickups);
+    } else {
+      setVisiblePickups(pickups.filter(function (pickup) {
+        return pickup.type.toLowerCase().includes(key);
+      }));
+    }
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "container-md",
     style: {
       marginBottom: '4em'
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.AddPickupButton, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.Searchbar, {
+      type: "text",
+      onChange: search,
+      placeholder: "Plastic, Glass, ..."
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.AddPickupButton, {
       type: "button",
       className: "btn btn-primary",
       onClick: function onClick() {
@@ -6509,7 +6535,7 @@ var Calendar = function Calendar(_ref) {
       children: wdays.map(function (wday) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Wday__WEBPACK_IMPORTED_MODULE_3__["default"], {
           day: wday,
-          pickups: pickups.filter(function (pickup) {
+          pickups: visiblePickups.filter(function (pickup) {
             return pickup.weekday == wdays.indexOf(wday);
           }),
           del: deletePickup
@@ -6652,8 +6678,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style */ "./resources/js/components/style.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style */ "./resources/js/components/style.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -6677,6 +6705,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var Login = function Login(_ref) {
   var setUser = _ref.setUser;
 
@@ -6690,10 +6719,33 @@ var Login = function Login(_ref) {
       password = _useState4[0],
       setPassword = _useState4[1];
 
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({
+    borderColor: 'none'
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      formStyle = _useState6[0],
+      setFormStyle = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      err = _useState8[0],
+      setErr = _useState8[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    if (err) {
+      setFormStyle({
+        borderColor: 'red'
+      });
+    } else {
+      setFormStyle({
+        borderColor: 'none'
+      });
+    }
+  }, [err]);
+
   var handleSubmit = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(e) {
-      var data, _data$data, token, user;
-
+      var data, user, token;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -6704,29 +6756,42 @@ var Login = function Login(_ref) {
               return axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/login', {
                 email: email,
                 password: password
+              })["catch"](function (error) {
+                if (error.response) {
+                  setErr(true);
+                }
               });
 
             case 4:
               data = _context.sent;
-              _data$data = data.data, token = _data$data.token, user = _data$data.user;
-              setUser({
-                token: token,
-                user: user
-              });
-              _context.next = 12;
+
+              if (!err) {
+                user = (0,lodash__WEBPACK_IMPORTED_MODULE_3__.get)(data.data, 'user', {
+                  user: 'none'
+                });
+                token = (0,lodash__WEBPACK_IMPORTED_MODULE_3__.get)(data.data, 'token', {
+                  token: 'none'
+                });
+                setUser({
+                  token: token,
+                  user: user
+                });
+              }
+
+              _context.next = 11;
               break;
 
-            case 9:
-              _context.prev = 9;
+            case 8:
+              _context.prev = 8;
               _context.t0 = _context["catch"](1);
               console.error(_context.t0);
 
-            case 12:
+            case 11:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1, 9]]);
+      }, _callee, null, [[1, 8]]);
     }));
 
     return function handleSubmit(_x) {
@@ -6734,12 +6799,12 @@ var Login = function Login(_ref) {
     };
   }();
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_3__.FormContainer, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h3", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_4__.FormContainer, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
       children: "Login"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
       onSubmit: handleSubmit,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
         className: "form-control",
         type: "text",
         name: "email",
@@ -6748,8 +6813,9 @@ var Login = function Login(_ref) {
         onChange: function onChange(e) {
           return setEmail(e.target.value);
         },
+        style: formStyle,
         required: true
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
         className: "form-control",
         type: "password",
         name: "password",
@@ -6758,8 +6824,9 @@ var Login = function Login(_ref) {
         onChange: function onChange(e) {
           return setPassword(e.target.value);
         },
+        style: formStyle,
         required: true
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
         className: "btn btn-primary",
         type: "submit",
         value: "Login"
@@ -6892,31 +6959,46 @@ var Pickup = function Pickup(_ref) {
     end: 'xx:xx'
   });
   var colors = {
-    Plastic: '#F36838',
-    Organic: '#88685D',
-    Paper: '#4DED30',
-    Glass: '#5ED9FF',
-    Metal: '#057E87',
+    Plastic: '#5ED9FF',
+    Organic: '#4DED30',
+    Paper: '#D4D4D4',
+    Glass: '#15D5B0',
+    Metal: '#3F3F3F',
     Clothes: '#FFB6C1',
     'Light Bulbs': '#F6DA36',
-    Batteries: '#15D5B0',
+    Batteries: '#F36838',
     'E-Waste': '#9751B4'
   };
   var border = {
     border: '4px solid ' + colors[type],
     backgroundColor: colors[type] + '50'
   };
+  var img = {
+    background: 'url(../assets/images/' + type.replace(" ", "") + '.png)',
+    backgroundSize: '52px',
+    backgroundRepeat: 'no-repeat'
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_2__.SinglePickupContainer, {
     style: border,
     className: "container",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.CloseButton, {
-      onClick: function onClick() {
-        return del(id);
-      }
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
-      children: type
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h5", {
-      children: [start.slice(0, 5), " - ", end.slice(0, 5)]
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      style: {
+        width: '8.5em'
+      },
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.CloseButton, {
+        onClick: function onClick() {
+          return del(id);
+        }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
+        style: {
+          fontSize: '1.45em'
+        },
+        children: type
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h5", {
+        children: [start.slice(0, 5), " - ", end.slice(0, 5)]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.PickupImage, {
+      style: img
     })]
   });
 };
@@ -6941,8 +7023,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style */ "./resources/js/components/style.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style */ "./resources/js/components/style.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -6960,6 +7044,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -6989,10 +7074,33 @@ var Register = function Register(_ref) {
       confirmation = _useState8[0],
       setConfirmation = _useState8[1];
 
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({
+    borderColor: 'none'
+  }),
+      _useState10 = _slicedToArray(_useState9, 2),
+      formStyle = _useState10[0],
+      setFormStyle = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      err = _useState12[0],
+      setErr = _useState12[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    if (err) {
+      setFormStyle({
+        borderColor: 'red'
+      });
+    } else {
+      setFormStyle({
+        borderColor: 'none'
+      });
+    }
+  }, [err]);
+
   var handleSubmit = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(e) {
-      var data, _data$data, token, user;
-
+      var data, user, token;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -7005,29 +7113,42 @@ var Register = function Register(_ref) {
                 email: email,
                 password: password,
                 password_confirmation: confirmation
+              })["catch"](function (error) {
+                if (error.response) {
+                  setErr(true);
+                }
               });
 
             case 4:
               data = _context.sent;
-              _data$data = data.data, token = _data$data.token, user = _data$data.user;
-              setUser({
-                token: token,
-                user: user
-              });
-              _context.next = 12;
+
+              if (!err) {
+                user = (0,lodash__WEBPACK_IMPORTED_MODULE_3__.get)(data.data, 'user', {
+                  user: 'none'
+                });
+                token = (0,lodash__WEBPACK_IMPORTED_MODULE_3__.get)(data.data, 'token', {
+                  token: 'none'
+                });
+                setUser({
+                  token: token,
+                  user: user
+                });
+              }
+
+              _context.next = 11;
               break;
 
-            case 9:
-              _context.prev = 9;
+            case 8:
+              _context.prev = 8;
               _context.t0 = _context["catch"](1);
               console.error(_context.t0);
 
-            case 12:
+            case 11:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1, 9]]);
+      }, _callee, null, [[1, 8]]);
     }));
 
     return function handleSubmit(_x) {
@@ -7035,14 +7156,14 @@ var Register = function Register(_ref) {
     };
   }();
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_3__.FormContainer, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h3", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_4__.FormContainer, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
       children: "Register"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
       onSubmit: function onSubmit(e) {
         handleSubmit(e);
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
         className: "form-control",
         placeholder: "Username",
         type: "text",
@@ -7052,7 +7173,8 @@ var Register = function Register(_ref) {
           return setUsername(e.target.value);
         },
         required: true
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+        style: formStyle,
         className: "form-control",
         placeholder: "Email",
         type: "text",
@@ -7062,7 +7184,7 @@ var Register = function Register(_ref) {
           return setEmail(e.target.value);
         },
         required: true
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
         className: "form-control",
         placeholder: "Password",
         type: "password",
@@ -7072,7 +7194,7 @@ var Register = function Register(_ref) {
           return setPassword(e.target.value);
         },
         required: true
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
         className: "form-control",
         placeholder: "Password confirmation",
         type: "password",
@@ -7082,7 +7204,7 @@ var Register = function Register(_ref) {
           return setConfirmation(e.target.value);
         },
         required: true
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
         className: "btn btn-primary",
         type: "submit",
         value: "Register"
@@ -7169,33 +7291,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "CloseButton": () => (/* binding */ CloseButton),
 /* harmony export */   "Backdrop": () => (/* binding */ Backdrop),
 /* harmony export */   "PickupModal": () => (/* binding */ PickupModal),
-/* harmony export */   "AddPickupButton": () => (/* binding */ AddPickupButton)
+/* harmony export */   "AddPickupButton": () => (/* binding */ AddPickupButton),
+/* harmony export */   "Searchbar": () => (/* binding */ Searchbar),
+/* harmony export */   "PickupImage": () => (/* binding */ PickupImage)
 /* harmony export */ });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 /* harmony import */ var react_overlays_Modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-overlays/Modal */ "./node_modules/react-overlays/esm/Modal.js");
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 
 
-var AppContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    margin: auto;\n"])));
+var AppContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    margin: auto;\n    padding-top: 8.5em;\n    @media (max-width: 768px) {\n        padding-top: 6em;\n    }\n"])));
 var FormContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    margin: auto;\n    max-width: 400px;\n    padding: 1em;\n"])));
-var PickupsContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n    align-items: flex-start;\n    overflow-x: auto;\n    overflow-y: hidden;\n    margin-right: var(--bs-gutter-x,-1.5rem);\n    margin-left: var(--bs-gutter-x,-1.5rem);\n    margin-bottom: 1em;\n    ", "\n"])), ''
-/* &::-webkit-scrollbar{
-display: none;
-} */
-); //Pickup blue-bordered container
+var PickupsContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n    align-items: flex-start;\n    overflow-x: auto;\n    overflow-y: hidden;\n    margin-right: var(--bs-gutter-x,-1.5rem);\n    margin-left: var(--bs-gutter-x,-1.5rem);\n    margin-bottom: 1em;\n    &::-webkit-scrollbar {\n       display: none;\n    }\n"]))); //Pickup blue-bordered container
 
-var SinglePickupContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    ", "\n    border-radius: 10px;\n    margin: 1em;\n    margin-right: -0.5em;\n    min-width: 12em;\n    max-width: 22vw;\n    padding-right: 0.8em;\n    padding-top: 0.4em;\n"])), ''
-/* border: 4px solid #0d6efd; */
-);
-var CloseButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    float: right;\n    position: relative;\n    bottom: 1.1rem;\n    left: 0.7rem;\n    display: none;\n    border: none;\n    background-color: red;\n    color: white;\n    width: 1.2rem;\n    height: 1.2rem;\n    border-radius: 20px;\n    line-height: 0;\n    ", ":hover & {\n        display: unset;\n    }\n    &:before{\n        content: '-';\n    }\n"])), SinglePickupContainer); //Shadow effect when modal appears
+var SinglePickupContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    border-radius: 10px;\n    margin: 1em;\n    margin-right: -0.5em;\n    min-width: 15em;\n    width: 15em;\n    padding-right: 0.1em;\n    padding-top: 0.4em;\n    display: flex;\n    justify-content: space-between;\n"])));
+var CloseButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    float: right;\n    position: relative;\n    bottom: 1.1rem;\n    left: 5.8rem;\n    display: none;\n    border: none;\n    background-color: red;\n    color: white;\n    width: 1.2rem;\n    height: 1.2rem;\n    border-radius: 20px;\n    line-height: 0;\n    padding-bottom: 3.5px;\n    padding-left: 5px;\n    font-size: 23px;\n    ", ":hover & {\n        display: unset;\n    }\n    &:before{\n        content: '-';\n    }\n"])), SinglePickupContainer); //Shadow effect when modal appears
 
 var Backdrop = (0,styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])('div')(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    position: fixed;\n    z-index: 1040;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    background-color: #000;\n    opacity: 0.5;\n"]))); //Modal style
 
 var PickupModal = (0,styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(react_overlays_Modal__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    position: fixed;\n    width: 90vw;\n    max-width: 30em;\n    z-index: 1040;\n    top: 140px;\n    right: 5vw;\n    border: 1px solid #e5e5e5;\n    background-color: white;\n    box-shadow: 0 5px 15px rgb(0 0 0 / 50%);\n    padding: 20px;\n    border-radius: 17px;\n"])));
-var AddPickupButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    background-color: white;\n    margin: 2.3em;\n    position: fixed;\n    top: 0;\n    right: 0;\n    z-index: 1;\n    border-radius: 20px;\n    width: 18vw;\n    border: 3px solid black;\n    color: black;\n    font-weight: bold;\n    box-shadow: none;\n    @media (max-width: 768px) {\n        margin: 1.3em;\n    }\n    &:hover {\n        border-color: black;\n        color: white;\n        background-color: black;\n        box-shadow: none;\n    }\n    &:focus {\n        border-color: black;\n        color: black;\n        background-color: white;\n        box-shadow: none;\n    }\n"])));
+var AddPickupButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    background-color: white;\n    position: fixed;\n    top: 2em;\n    right: 2em;\n    z-index: 1;\n    border-radius: 20px;\n    width: 5em;\n    border: 3px solid black;\n    color: black;\n    font-weight: bold;\n    box-shadow: none;\n    @media (max-width: 768px) {\n        top: 1.3em;\n        padding: 0.25em;\n    }\n    &:hover {\n        border-color: black;\n        color: white;\n        background-color: black;\n        box-shadow: none;\n    }\n    &:focus {\n        border-color: black;\n        color: black;\n        background-color: white;\n        box-shadow: none;\n    }\n"])));
+var Searchbar = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].input(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    display: block;\n    border-radius: 20px;\n    width: 14em;\n    border: 1px solid black;\n    color: black;\n    font-style: italic;\n    padding-left: 0.4em;\n    position: fixed;\n    right: 2em;\n    top: 8em;\n    @media (max-width: 768px) {\n        display: none;\n    }\n    &:focus-visible {\n        outline: none;\n    }\n"])));
+var PickupImage = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    width: 3em;\n    height: 4em;\n    margin-top: 3px;\n    padding: 32px;\n"])));
 
 /***/ }),
 

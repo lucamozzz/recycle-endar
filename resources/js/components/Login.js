@@ -1,10 +1,24 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { get } from 'lodash';
 import { FormContainer } from './style';
 
 export const Login = ({ setUser }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [formStyle, setFormStyle] = useState({ borderColor: 'none' });
+    const [err, setErr] = useState(false);
+    useEffect(() => {
+        if (err) {
+            setFormStyle({
+                borderColor: 'red',
+            })
+        } else {
+            setFormStyle({
+                borderColor: 'none',
+            })
+        }
+    }, [err]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -13,9 +27,16 @@ export const Login = ({ setUser }) => {
                 {
                     email: email,
                     password: password,
+                }).catch(function (error) {
+                    if (error.response) {
+                        setErr(true);
+                    }
                 });
-            const { token, user } = data.data;
-            setUser({ token, user });
+            if (!err) {
+                const user = get(data.data, 'user', { user: 'none' });
+                const token = get(data.data, 'token', { token: 'none' });
+                setUser({ token, user });
+            }
         } catch (error) {
             console.error(error);
         }
@@ -32,6 +53,7 @@ export const Login = ({ setUser }) => {
                     placeholder='Email'
                     value={email}
                     onChange={e => setEmail(e.target.value)}
+                    style={formStyle}
                     required
                 /><br />
                 <input
@@ -41,6 +63,7 @@ export const Login = ({ setUser }) => {
                     placeholder='Password'
                     value={password}
                     onChange={e => setPassword(e.target.value)}
+                    style={formStyle}
                     required
                 /><br />
                 <input className="btn btn-primary" type="submit" value='Login' />

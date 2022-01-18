@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Backdrop, PickupModal, AddPickupButton } from './style';
+import { Backdrop, PickupModal, AddPickupButton, Searchbar } from './style';
 import Wday from './Wday';
 import axios from 'axios';
 
@@ -37,6 +37,12 @@ export const Calendar = ({ loggedUser }) => {
 
     //Pickups list
     const [pickups, setPickups] = useState([]);
+
+    //Displayed pickups
+    const [visiblePickups, setVisiblePickups] = useState([])
+    useEffect(() => {
+        setVisiblePickups(pickups)
+    }, [pickups])
 
     //Pickups count
     const [count, setCount] = useState(0);
@@ -85,8 +91,22 @@ export const Calendar = ({ loggedUser }) => {
     useEffect(loadPickups,
         [count]);
 
+    const search = (event) => {
+        let key = event.target.value.toLowerCase()
+        if (key == '') {
+            setVisiblePickups(pickups);
+        } else {
+            setVisiblePickups(
+                pickups.filter(
+                    pickup => pickup.type.toLowerCase().includes(key)
+                )
+            )
+        }
+    }
+
     return (
         <div className='container-md' style={{ marginBottom: '4em' }}>
+            <Searchbar type="text" onChange={search} placeholder='Plastic, Glass, ...' />
             <AddPickupButton
                 type="button"
                 className="btn btn-primary"
@@ -104,7 +124,7 @@ export const Calendar = ({ loggedUser }) => {
                                         key={wdays.indexOf(wday)}
                                         day={wday}
                                         pickups={
-                                            pickups
+                                            visiblePickups
                                                 .filter(
                                                     pickup => pickup.weekday == wdays.indexOf(wday)
                                                 )

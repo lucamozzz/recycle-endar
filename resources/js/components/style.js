@@ -3,6 +3,10 @@ import Modal from 'react-overlays/Modal';
 
 export const AppContainer = styled.div`
     margin: auto;
+    padding-top: 8.5em;
+    @media (max-width: 768px) {
+        padding-top: 6em;
+    }
 `;
 
 export const FormContainer = styled.div`
@@ -19,25 +23,29 @@ export const PickupsContainer = styled.div`
     margin-right: var(--bs-gutter-x,-1.5rem);
     margin-left: var(--bs-gutter-x,-1.5rem);
     margin-bottom: 1em;
+    &::-webkit-scrollbar {
+       display: none;
+    }
 `;
 
 //Pickup blue-bordered container
 export const SinglePickupContainer = styled.div`
-    ${'' /* border: 4px solid #0d6efd; */}
     border-radius: 10px;
     margin: 1em;
     margin-right: -0.5em;
-    min-width: 12em;
-    max-width: 22vw;
+    min-width: 15em;
+    width: 15em;
     padding-right: 0.1em;
     padding-top: 0.4em;
+    display: flex;
+    justify-content: space-between;
 `;
 
 export const CloseButton = styled.button`
     float: right;
     position: relative;
     bottom: 1.1rem;
-    left: 0.7rem;
+    left: 5.8rem;
     display: none;
     border: none;
     background-color: red;
@@ -46,6 +54,9 @@ export const CloseButton = styled.button`
     height: 1.2rem;
     border-radius: 20px;
     line-height: 0;
+    padding-bottom: 3.5px;
+    padding-left: 5px;
+    font-size: 23px;
     ${SinglePickupContainer}:hover & {
         display: unset;
     }
@@ -83,19 +94,19 @@ export const PickupModal = styled(Modal)`
 
 export const AddPickupButton = styled.button`
     background-color: white;
-    margin: 2.3em;
     position: fixed;
-    top: 0;
-    right: 0;
+    top: 2em;
+    right: 2em;
     z-index: 1;
     border-radius: 20px;
-    width: 18vw;
+    width: 5em;
     border: 3px solid black;
     color: black;
     font-weight: bold;
     box-shadow: none;
     @media (max-width: 768px) {
-        margin: 1.3em;
+        top: 1.3em;
+        padding: 0.25em;
     }
     &:hover {
         border-color: black;
@@ -110,3 +121,29 @@ export const AddPickupButton = styled.button`
         box-shadow: none;
     }
 `;
+
+export const Searchbar = styled.input`
+    display: block;
+    border-radius: 20px;
+    width: 14em;
+    border: 1px solid black;
+    color: black;
+    font-style: italic;
+    padding-left: 0.4em;
+    position: fixed;
+    right: 2em;
+    top: 8em;
+    @media (max-width: 768px) {
+        display: none;
+    }
+    &:focus-visible {
+        outline: none;
+    }
+`
+
+export const PickupImage = styled.div`
+    width: 3em;
+    height: 4em;
+    margin-top: 3px;
+    padding: 32px;
+`

@@ -11,11 +11,9 @@
 </head>
 
 <body>
-    <div style="padding-bottom: 9em;">
-        <div style="position: fixed; background-color: white; width: 100%; z-index: 1;">
-            <h2 class="h1" style="margin: 0.8em;">♻️ Recycle-endar</h2>
-            <hr style="margin: 0;">
-        </div>
+    <div style="position: fixed; background-color: white; width: 100%; z-index: 1;">
+        <h2 class="h1" style="margin: 0.8em;">♻️ Recycle-endar</h2>
+        <hr style="margin: 0;">
     </div>
     <div id="root"></div>
     <script src="{{mix('js/app.js')}}"></script>

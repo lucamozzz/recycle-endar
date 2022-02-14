@@ -133,7 +133,7 @@ export const Searchbar = styled.input`
     position: fixed;
     right: 2em;
     top: 8em;
-    @media (max-width: 768px) {
+    @media (max-width: 968px) {
         display: none;
     }
     &:focus-visible {

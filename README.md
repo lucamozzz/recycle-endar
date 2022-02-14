@@ -53,4 +53,4 @@ When authenticated, you gain access to the following endpoints:
 </ul>
 
 ## License
-this project is licensed under the MIT license
+This project is licensed under the MIT license

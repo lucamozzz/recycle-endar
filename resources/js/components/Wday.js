@@ -1,5 +1,5 @@
 import React from 'react';
-import { PickupsContainer } from './style';
+import { HorizontalContainer } from './style';
 import Pickup from './Pickup';
 
 let h3Style = {};
@@ -22,7 +22,7 @@ export const Wday = ({ day, pickups, del }) => {
     return (
         <>
             <h3 style={h3Style}>{day}</h3>
-            <PickupsContainer>
+            <HorizontalContainer>
                 {
                     pickups
                         .map(
@@ -33,7 +33,7 @@ export const Wday = ({ day, pickups, del }) => {
                             }
                         )
                 }
-            </PickupsContainer>
+            </HorizontalContainer>
         </>
     )
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { get } from 'lodash';
-import { SinglePickupContainer, CloseButton, PickupImage } from './style';
+import { SingleContainer, CloseButton, PickupImage } from './style';
 
 export const Pickup = ({ pickup, del }) => {
     const id = get(pickup, 'id', { id: 'Unknown id' });
@@ -33,14 +33,14 @@ export const Pickup = ({ pickup, del }) => {
     }
 
     return (
-        <SinglePickupContainer style={border} className='container'>
+        <SingleContainer style={border} className='container'>
             <div style={{ width: '8.5em' }}>
                 <CloseButton onClick={() => del(id)} />
                 <h4 style={{ fontSize: '1.45em' }}>{type}</h4>
                 <h5>{start.slice(0, 5)} - {end.slice(0, 5)}</h5>
             </div>
             <PickupImage style={img} />
-        </SinglePickupContainer>
+        </SingleContainer>
     )
 }
 

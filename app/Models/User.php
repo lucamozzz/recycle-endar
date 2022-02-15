@@ -49,4 +49,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(PickUp::class);
     }
+
+    /**
+     * Get the pickups for this user.
+     */
+    public function calendars()
+    {
+        return $this->hasMany(Calendar::class);
+    }
 }

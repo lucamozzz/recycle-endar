@@ -6262,16 +6262,16 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/components/Calendar.js":
-/*!*********************************************!*\
-  !*** ./resources/js/components/Calendar.js ***!
-  \*********************************************/
+/***/ "./resources/js/components/Application.js":
+/*!************************************************!*\
+  !*** ./resources/js/components/Application.js ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Calendar": () => (/* binding */ Calendar),
+/* harmony export */   "Application": () => (/* binding */ Application),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
@@ -6281,7 +6281,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Wday__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Wday */ "./resources/js/components/Wday.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _Calendar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Calendar */ "./resources/js/components/Calendar.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -6312,8 +6313,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var wdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-var Calendar = function Calendar(_ref) {
+var Application = function Application(_ref) {
   var loggedUser = _ref.loggedUser;
 
   //Pickup parameters
@@ -6337,17 +6339,32 @@ var Calendar = function Calendar(_ref) {
       end = _useState8[0],
       setEnd = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(loggedUser.token),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
       _useState10 = _slicedToArray(_useState9, 2),
-      token = _useState10[0],
-      setToken = _useState10[1];
+      name = _useState10[0],
+      setName = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(loggedUser.user.id),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("Default"),
       _useState12 = _slicedToArray(_useState11, 2),
-      userId = _useState12[0],
-      setUserId = _useState12[1];
+      description = _useState12[0],
+      setDescription = _useState12[1];
 
-  var loadPickups = /*#__PURE__*/function () {
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(loggedUser.token),
+      _useState14 = _slicedToArray(_useState13, 2),
+      token = _useState14[0],
+      setToken = _useState14[1];
+
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(loggedUser.user.id),
+      _useState16 = _slicedToArray(_useState15, 2),
+      userId = _useState16[0],
+      setUserId = _useState16[1];
+
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+      _useState18 = _slicedToArray(_useState17, 2),
+      selectedCalendar = _useState18[0],
+      setSelectedCalendar = _useState18[1];
+
+  var loadCalendars = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       var data;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
@@ -6356,7 +6373,7 @@ var Calendar = function Calendar(_ref) {
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_4___default()("/api/pickups", {
+              return axios__WEBPACK_IMPORTED_MODULE_4___default()("/api/calendars", {
                 headers: {
                   'Authorization': "Bearer ".concat(token)
                 }
@@ -6364,7 +6381,7 @@ var Calendar = function Calendar(_ref) {
 
             case 3:
               data = _context.sent;
-              setPickups(data.data);
+              setCalendars(data.data);
               _context.next = 10;
               break;
 
@@ -6381,47 +6398,95 @@ var Calendar = function Calendar(_ref) {
       }, _callee, null, [[0, 7]]);
     }));
 
-    return function loadPickups() {
+    return function loadCalendars() {
       return _ref2.apply(this, arguments);
     };
-  }(); //Pickups list
+  }(); //Calendars list
 
 
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
-      _useState14 = _slicedToArray(_useState13, 2),
-      pickups = _useState14[0],
-      setPickups = _useState14[1]; //Displayed pickups
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState20 = _slicedToArray(_useState19, 2),
+      calendars = _useState20[0],
+      setCalendars = _useState20[1];
 
-
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
-      _useState16 = _slicedToArray(_useState15, 2),
-      visiblePickups = _useState16[0],
-      setVisiblePickups = _useState16[1];
-
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    setVisiblePickups(pickups);
-  }, [pickups]); //Pickups count
-
-  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
-      _useState18 = _slicedToArray(_useState17, 2),
-      count = _useState18[0],
-      setCount = _useState18[1];
-
-  var createPickup = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(e) {
+  var loadPickups = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var data;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_4___default()("/api/pickups", {
+                headers: {
+                  'Authorization': "Bearer ".concat(token)
+                }
+              });
+
+            case 3:
+              data = _context2.sent;
+              setPickups(data.data);
+              _context2.next = 10;
+              break;
+
+            case 7:
+              _context2.prev = 7;
+              _context2.t0 = _context2["catch"](0);
+              console.error(_context2.t0);
+
+            case 10:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[0, 7]]);
+    }));
+
+    return function loadPickups() {
+      return _ref3.apply(this, arguments);
+    };
+  }(); //Pickups list
+
+
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState22 = _slicedToArray(_useState21, 2),
+      pickups = _useState22[0],
+      setPickups = _useState22[1]; //Displayed pickups
+
+
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState24 = _slicedToArray(_useState23, 2),
+      visiblePickups = _useState24[0],
+      setVisiblePickups = _useState24[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    setVisiblePickups(pickups.filter(function (pickup) {
+      return pickup.calendar_id == selectedCalendar;
+    }));
+  }, [pickups, selectedCalendar]); //Pickups count
+
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState26 = _slicedToArray(_useState25, 2),
+      count = _useState26[0],
+      setCount = _useState26[1];
+
+  var createPickup = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(e) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
               e.preventDefault();
-              _context2.prev = 1;
-              _context2.next = 4;
+              _context3.prev = 1;
+              _context3.next = 4;
               return axios__WEBPACK_IMPORTED_MODULE_4___default().post("/api/pickups", {
                 type: type,
                 weekday: weekday,
                 start: start,
                 end: end,
-                user_id: userId
+                user_id: userId,
+                calendar_id: selectedCalendar
               }, {
                 headers: {
                   'Authorization': "Bearer ".concat(token)
@@ -6431,35 +6496,35 @@ var Calendar = function Calendar(_ref) {
             case 4:
               setShow(false);
               setCount(count + 1);
-              _context2.next = 11;
+              _context3.next = 11;
               break;
 
             case 8:
-              _context2.prev = 8;
-              _context2.t0 = _context2["catch"](1);
-              console.error(_context2.t0);
+              _context3.prev = 8;
+              _context3.t0 = _context3["catch"](1);
+              console.error(_context3.t0);
 
             case 11:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2, null, [[1, 8]]);
+      }, _callee3, null, [[1, 8]]);
     }));
 
     return function createPickup(_x) {
-      return _ref3.apply(this, arguments);
+      return _ref4.apply(this, arguments);
     };
   }();
 
   var deletePickup = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(id) {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(id) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
-              _context3.prev = 0;
-              _context3.next = 3;
+              _context4.prev = 0;
+              _context4.next = 3;
               return axios__WEBPACK_IMPORTED_MODULE_4___default()["delete"]("api/pickups/".concat(id), {
                 headers: {
                   'Authorization': "Bearer ".concat(token)
@@ -6468,72 +6533,223 @@ var Calendar = function Calendar(_ref) {
 
             case 3:
               setCount(count - 1);
-              _context3.next = 9;
+              _context4.next = 9;
               break;
 
             case 6:
-              _context3.prev = 6;
-              _context3.t0 = _context3["catch"](0);
-              console.error(_context3.t0);
+              _context4.prev = 6;
+              _context4.t0 = _context4["catch"](0);
+              console.error(_context4.t0);
 
             case 9:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
-      }, _callee3, null, [[0, 6]]);
+      }, _callee4, null, [[0, 6]]);
     }));
 
     return function deletePickup(_x2) {
-      return _ref4.apply(this, arguments);
+      return _ref5.apply(this, arguments);
     };
-  }(); //Modal show setting
+  }();
+
+  var createCalendar = /*#__PURE__*/function () {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(e) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              e.preventDefault();
+              _context5.prev = 1;
+              _context5.next = 4;
+              return axios__WEBPACK_IMPORTED_MODULE_4___default().post("/api/calendars", {
+                name: name,
+                description: description,
+                user_id: userId
+              }, {
+                headers: {
+                  'Authorization': "Bearer ".concat(token)
+                }
+              });
+
+            case 4:
+              setShowCalendarModal(false);
+              setCount(count + 1);
+              _context5.next = 11;
+              break;
+
+            case 8:
+              _context5.prev = 8;
+              _context5.t0 = _context5["catch"](1);
+              console.error(_context5.t0);
+
+            case 11:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5, null, [[1, 8]]);
+    }));
+
+    return function createCalendar(_x3) {
+      return _ref6.apply(this, arguments);
+    };
+  }();
+
+  var deleteCalendar = /*#__PURE__*/function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6(id) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              if (!(calendars.length == 1)) {
+                _context6.next = 2;
+                break;
+              }
+
+              return _context6.abrupt("return");
+
+            case 2:
+              _context6.prev = 2;
+              _context6.next = 5;
+              return axios__WEBPACK_IMPORTED_MODULE_4___default()["delete"]("api/calendars/".concat(id), {
+                headers: {
+                  'Authorization': "Bearer ".concat(token)
+                }
+              });
+
+            case 5:
+              setCount(count - 1);
+              _context6.next = 11;
+              break;
+
+            case 8:
+              _context6.prev = 8;
+              _context6.t0 = _context6["catch"](2);
+              console.error(_context6.t0);
+
+            case 11:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6, null, [[2, 8]]);
+    }));
+
+    return function deleteCalendar(_x4) {
+      return _ref7.apply(this, arguments);
+    };
+  }(); //Pickup modal show setting
 
 
-  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-      _useState20 = _slicedToArray(_useState19, 2),
-      show = _useState20[0],
-      setShow = _useState20[1];
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState28 = _slicedToArray(_useState27, 2),
+      show = _useState28[0],
+      setShow = _useState28[1]; //Calendar modal show setting
+
+
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState30 = _slicedToArray(_useState29, 2),
+      showCalendarModal = _useState30[0],
+      setShowCalendarModal = _useState30[1];
 
   var renderBackdrop = function renderBackdrop(props) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.Backdrop, _objectSpread({}, props));
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.Backdrop, _objectSpread({}, props));
   }; //Reload pickups everytime the count value changes
 
 
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(loadPickups, [count]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(loadPickups, [count]); //Reload pickups everytime the count value changes
 
-  var search = function search(event) {
-    var key = event.target.value.toLowerCase();
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(loadCalendars, [count]); //Imposta il primo calendario della lista come selezionato
 
-    if (key == '') {
-      setVisiblePickups(pickups);
-    } else {
-      setVisiblePickups(pickups.filter(function (pickup) {
-        return pickup.type.toLowerCase().includes(key);
-      }));
-    }
-  };
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+      while (1) {
+        switch (_context7.prev = _context7.next) {
+          case 0:
+            setSelectedCalendar(calendars[0].id);
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          case 1:
+          case "end":
+            return _context7.stop();
+        }
+      }
+    }, _callee7);
+  })), [calendars]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    setVisiblePickups(pickups.filter(function (pickup) {
+      return pickup.calendar_id == selectedCalendar;
+    }));
+  }, [selectedCalendar]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
     className: "container-md",
     style: {
       marginBottom: '4em'
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.Searchbar, {
-      type: "text",
-      onChange: search,
-      placeholder: "Plastic, Glass, ..."
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.AddPickupButton, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.AddPickupButton, {
       type: "button",
       className: "btn btn-primary",
       onClick: function onClick() {
         return setShow(true);
       },
-      children: "+"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      children: "\u23F1\uFE0F"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.AddCalendarButton, {
+      type: "button",
+      className: "btn btn-primary",
+      onClick: function onClick() {
+        return setShowCalendarModal(true);
+      },
+      children: "\uD83D\uDCC5"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.DeletCalendarButton, {
+      type: "button",
+      className: "btn btn-primary",
+      onClick: function onClick() {
+        return deleteCalendar(selectedCalendar);
+      },
+      children: "\uD83D\uDDD1\uFE0F"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      className: "container",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.HorizontalContainer, {
+        children: calendars.map(function (calendar) {
+          if (calendar.id == selectedCalendar) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.SingleCalendarContainer, {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Calendar__WEBPACK_IMPORTED_MODULE_5__["default"], {
+                calendar: calendar,
+                del: deleteCalendar
+              }, calendars.indexOf(calendar))
+            }, calendars.indexOf(calendar));
+          } else {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.SingleCalendarContainer, {
+              style: {
+                opacity: '50%'
+              },
+              onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+                  while (1) {
+                    switch (_context8.prev = _context8.next) {
+                      case 0:
+                        return _context8.abrupt("return", setSelectedCalendar(calendar.id));
+
+                      case 1:
+                      case "end":
+                        return _context8.stop();
+                    }
+                  }
+                }, _callee8);
+              })),
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Calendar__WEBPACK_IMPORTED_MODULE_5__["default"], {
+                calendar: calendar,
+                del: deleteCalendar
+              }, calendars.indexOf(calendar))
+            }, calendars.indexOf(calendar));
+          }
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       className: "container",
       children: wdays.map(function (wday) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Wday__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Wday__WEBPACK_IMPORTED_MODULE_3__["default"], {
           day: wday,
           pickups: visiblePickups.filter(function (pickup) {
             return pickup.weekday == wdays.indexOf(wday);
@@ -6541,24 +6757,24 @@ var Calendar = function Calendar(_ref) {
           del: deletePickup
         }, wdays.indexOf(wday));
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.PickupModal, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.PickupModal, {
       show: show,
       onHide: function onHide() {
         return setShow(false);
       },
       renderBackdrop: renderBackdrop,
       "aria-labelledby": "modal-label",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h4", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
           id: "modal-label",
           children: "Create new Pickup"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("form", {
           onSubmit: createPickup,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
             className: "form-label",
             htmlFor: "type",
             children: "Select type: "
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("select", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("select", {
             className: "form-select",
             type: "type",
             value: type,
@@ -6566,32 +6782,32 @@ var Calendar = function Calendar(_ref) {
               return setType(e.target.value);
             },
             required: true,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
               hidden: true
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
               children: "Plastic"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
               children: "Organic"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
               children: "Paper"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
               children: "Glass"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
               children: "Metal"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
               children: "Clothes"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
               children: "Light Bulbs"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
               children: "Batteries"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
               children: "E-Waste"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
             className: "form-label",
             htmlFor: "weekday",
             children: "Select day: "
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("select", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("select", {
             className: "form-select",
             type: "weekday",
             value: weekday,
@@ -6599,35 +6815,35 @@ var Calendar = function Calendar(_ref) {
               return setWeekday(e.target.value);
             },
             required: true,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
               hidden: true
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
               value: 0,
               children: "Monday"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
               value: 1,
               children: "Tuesday"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
               value: 2,
               children: "Wednesday"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
               value: 3,
               children: "Thursday"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
               value: 4,
               children: "Friday"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
               value: 5,
               children: "Saturday"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
               value: 6,
               children: "Sunday"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
             className: "form-label",
             htmlFor: "start",
             children: "From: "
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
             className: "form-control",
             type: "time",
             value: start,
@@ -6635,11 +6851,11 @@ var Calendar = function Calendar(_ref) {
               return setStart(e.target.value);
             },
             required: true
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
             className: "form-label",
             htmlFor: "end",
             children: "To: "
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
             className: "form-control",
             type: "time",
             value: end,
@@ -6647,7 +6863,39 @@ var Calendar = function Calendar(_ref) {
               return setEnd(e.target.value);
             },
             required: true
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+            className: "btn btn-primary",
+            type: "submit",
+            value: "Confirm"
+          })]
+        })]
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_style__WEBPACK_IMPORTED_MODULE_2__.PickupModal, {
+      show: showCalendarModal,
+      onHide: function onHide() {
+        return showCalendarModal(false);
+      },
+      renderBackdrop: renderBackdrop,
+      "aria-labelledby": "modal-label",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
+          id: "modal-label",
+          children: "Create new Calendar"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("form", {
+          onSubmit: createCalendar,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+            className: "form-label",
+            htmlFor: "type",
+            children: "Insert name: "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+            className: "form-control",
+            type: "text",
+            value: name,
+            onChange: function onChange(e) {
+              return setName(e.target.value);
+            },
+            required: true
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
             className: "btn btn-primary",
             type: "submit",
             value: "Confirm"
@@ -6655,6 +6903,50 @@ var Calendar = function Calendar(_ref) {
         })]
       })
     })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Application);
+
+/***/ }),
+
+/***/ "./resources/js/components/Calendar.js":
+/*!*********************************************!*\
+  !*** ./resources/js/components/Calendar.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Calendar": () => (/* binding */ Calendar),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style */ "./resources/js/components/style.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+var Calendar = function Calendar(_ref) {
+  var calendar = _ref.calendar,
+      del = _ref.del,
+      edit = _ref.edit;
+  var name = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.get)(calendar, 'name', {
+    name: 'Unknown name'
+  });
+  var id = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.get)(calendar, 'id', {
+    name: 'Unknown name'
+  });
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
+      style: {
+        fontSize: '1.45em'
+      },
+      children: name
+    })
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Calendar);
@@ -6852,7 +7144,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style */ "./resources/js/components/style.js");
-/* harmony import */ var _Calendar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Calendar */ "./resources/js/components/Calendar.js");
+/* harmony import */ var _Application__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Application */ "./resources/js/components/Application.js");
 /* harmony import */ var _Register__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Register */ "./resources/js/components/Register.js");
 /* harmony import */ var _Login__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Login */ "./resources/js/components/Login.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
@@ -6892,7 +7184,7 @@ var Main = function Main() {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (user != undefined) {
       setComponent( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_style__WEBPACK_IMPORTED_MODULE_1__.AppContainer, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Calendar__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Application__WEBPACK_IMPORTED_MODULE_2__["default"], {
           loggedUser: user
         })
       }));
@@ -6978,7 +7270,7 @@ var Pickup = function Pickup(_ref) {
     backgroundSize: '52px',
     backgroundRepeat: 'no-repeat'
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_2__.SinglePickupContainer, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_style__WEBPACK_IMPORTED_MODULE_2__.SingleContainer, {
     style: border,
     className: "container",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -7122,33 +7414,57 @@ var Register = function Register(_ref) {
             case 4:
               data = _context.sent;
 
-              if (!err) {
-                user = (0,lodash__WEBPACK_IMPORTED_MODULE_3__.get)(data.data, 'user', {
-                  user: 'none'
-                });
-                token = (0,lodash__WEBPACK_IMPORTED_MODULE_3__.get)(data.data, 'token', {
-                  token: 'none'
-                });
-                setUser({
-                  token: token,
-                  user: user
-                });
+              if (err) {
+                _context.next = 17;
+                break;
               }
 
-              _context.next = 11;
+              user = (0,lodash__WEBPACK_IMPORTED_MODULE_3__.get)(data.data, 'user', {
+                user: 'none'
+              });
+              token = (0,lodash__WEBPACK_IMPORTED_MODULE_3__.get)(data.data, 'token', {
+                token: 'none'
+              });
+              setUser({
+                token: token,
+                user: user
+              });
+              _context.prev = 9;
+              _context.next = 12;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/calendars", {
+                name: 'New calendar',
+                description: 'default',
+                user_id: user.id
+              }, {
+                headers: {
+                  'Authorization': "Bearer ".concat(token)
+                }
+              });
+
+            case 12:
+              _context.next = 17;
               break;
 
-            case 8:
-              _context.prev = 8;
-              _context.t0 = _context["catch"](1);
+            case 14:
+              _context.prev = 14;
+              _context.t0 = _context["catch"](9);
               console.error(_context.t0);
 
-            case 11:
+            case 17:
+              _context.next = 22;
+              break;
+
+            case 19:
+              _context.prev = 19;
+              _context.t1 = _context["catch"](1);
+              console.error(_context.t1);
+
+            case 22:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1, 8]]);
+      }, _callee, null, [[1, 19], [9, 14]]);
     }));
 
     return function handleSubmit(_x) {
@@ -7261,7 +7577,7 @@ var Wday = function Wday(_ref) {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
       style: h3Style,
       children: day
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_style__WEBPACK_IMPORTED_MODULE_1__.PickupsContainer, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_style__WEBPACK_IMPORTED_MODULE_1__.HorizontalContainer, {
       children: pickups.map(function (pickup) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Pickup__WEBPACK_IMPORTED_MODULE_2__["default"], {
           pickup: pickup,
@@ -7286,18 +7602,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppContainer": () => (/* binding */ AppContainer),
 /* harmony export */   "FormContainer": () => (/* binding */ FormContainer),
-/* harmony export */   "PickupsContainer": () => (/* binding */ PickupsContainer),
-/* harmony export */   "SinglePickupContainer": () => (/* binding */ SinglePickupContainer),
+/* harmony export */   "HorizontalContainer": () => (/* binding */ HorizontalContainer),
+/* harmony export */   "SingleContainer": () => (/* binding */ SingleContainer),
+/* harmony export */   "SingleCalendarContainer": () => (/* binding */ SingleCalendarContainer),
 /* harmony export */   "CloseButton": () => (/* binding */ CloseButton),
 /* harmony export */   "Backdrop": () => (/* binding */ Backdrop),
 /* harmony export */   "PickupModal": () => (/* binding */ PickupModal),
 /* harmony export */   "AddPickupButton": () => (/* binding */ AddPickupButton),
+/* harmony export */   "AddCalendarButton": () => (/* binding */ AddCalendarButton),
+/* harmony export */   "DeletCalendarButton": () => (/* binding */ DeletCalendarButton),
 /* harmony export */   "Searchbar": () => (/* binding */ Searchbar),
 /* harmony export */   "PickupImage": () => (/* binding */ PickupImage)
 /* harmony export */ });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 /* harmony import */ var react_overlays_Modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-overlays/Modal */ "./node_modules/react-overlays/esm/Modal.js");
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13;
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -7305,17 +7624,21 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 var AppContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    margin: auto;\n    padding-top: 8.5em;\n    @media (max-width: 768px) {\n        padding-top: 6em;\n    }\n"])));
 var FormContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    margin: auto;\n    max-width: 400px;\n    padding: 1em;\n"])));
-var PickupsContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n    align-items: flex-start;\n    overflow-x: auto;\n    overflow-y: hidden;\n    margin-right: var(--bs-gutter-x,-1.5rem);\n    margin-left: var(--bs-gutter-x,-1.5rem);\n    margin-bottom: 1em;\n    &::-webkit-scrollbar {\n       display: none;\n    }\n"]))); //Pickup blue-bordered container
+var HorizontalContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n    align-items: flex-start;\n    overflow-x: auto;\n    overflow-y: hidden;\n    margin-right: var(--bs-gutter-x,-1.5rem);\n    margin-left: var(--bs-gutter-x,-1.5rem);\n    margin-bottom: 1em;\n    &::-webkit-scrollbar {\n       display: none;\n    }\n"]))); //Pickup blue-bordered container
 
-var SinglePickupContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    border-radius: 10px;\n    margin: 1em;\n    margin-right: -0.5em;\n    min-width: 15em;\n    width: 15em;\n    padding-right: 0.1em;\n    padding-top: 0.4em;\n    display: flex;\n    justify-content: space-between;\n"])));
-var CloseButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    float: right;\n    position: relative;\n    bottom: 1.1rem;\n    left: 5.8rem;\n    display: none;\n    border: none;\n    background-color: red;\n    color: white;\n    width: 1.2rem;\n    height: 1.2rem;\n    border-radius: 20px;\n    line-height: 0;\n    padding-bottom: 3.5px;\n    padding-left: 5px;\n    font-size: 23px;\n    ", ":hover & {\n        display: unset;\n    }\n    &:before{\n        content: '-';\n    }\n"])), SinglePickupContainer); //Shadow effect when modal appears
+var SingleContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    border-radius: 10px;\n    margin: 1em;\n    margin-right: -0.5em;\n    min-width: 15em;\n    width: 15em;\n    padding-right: 0.1em;\n    padding-top: 0.4em;\n    display: flex;\n    justify-content: space-between;\n"]))); //Pickup blue-bordered container
 
-var Backdrop = (0,styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])('div')(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    position: fixed;\n    z-index: 1040;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    background-color: #000;\n    opacity: 0.5;\n"]))); //Modal style
+var SingleCalendarContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    background: white;\n    border-radius: 10px;\n    border: 3px solid black;\n    margin: 1em;\n    min-width: 12em;\n    margin-right: -0.5em;\n    padding: 0 0.5em;\n    padding-top: 0.3em;\n    display: flex;\n    justify-content: space-between;\n"])));
+var CloseButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    float: right;\n    position: relative;\n    bottom: 1.1rem;\n    left: 5.8rem;\n    display: none;\n    border: none;\n    background-color: red;\n    color: white;\n    width: 1.2rem;\n    height: 1.2rem;\n    border-radius: 20px;\n    line-height: 0;\n    padding-bottom: 3.5px;\n    padding-left: 5px;\n    font-size: 23px;\n    ", ":hover & {\n        display: unset;\n    }\n    &:before{\n        content: '-';\n    }\n"])), SingleContainer); //Shadow effect when modal appears
 
-var PickupModal = (0,styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(react_overlays_Modal__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    position: fixed;\n    width: 90vw;\n    max-width: 30em;\n    z-index: 1040;\n    top: 140px;\n    right: 5vw;\n    border: 1px solid #e5e5e5;\n    background-color: white;\n    box-shadow: 0 5px 15px rgb(0 0 0 / 50%);\n    padding: 20px;\n    border-radius: 17px;\n"])));
-var AddPickupButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    background-color: white;\n    position: fixed;\n    top: 2em;\n    right: 2em;\n    z-index: 1;\n    border-radius: 20px;\n    width: 5em;\n    border: 3px solid black;\n    color: black;\n    font-weight: bold;\n    box-shadow: none;\n    @media (max-width: 768px) {\n        top: 1.3em;\n        padding: 0.25em;\n    }\n    &:hover {\n        border-color: black;\n        color: white;\n        background-color: black;\n        box-shadow: none;\n    }\n    &:focus {\n        border-color: black;\n        color: black;\n        background-color: white;\n        box-shadow: none;\n    }\n"])));
-var Searchbar = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].input(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    display: block;\n    border-radius: 20px;\n    width: 14em;\n    border: 1px solid black;\n    color: black;\n    font-style: italic;\n    padding-left: 0.4em;\n    position: fixed;\n    right: 2em;\n    top: 8em;\n    @media (max-width: 968px) {\n        display: none;\n    }\n    &:focus-visible {\n        outline: none;\n    }\n"])));
-var PickupImage = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    width: 3em;\n    height: 4em;\n    margin-top: 3px;\n    padding: 32px;\n"])));
+var Backdrop = (0,styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])('div')(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    position: fixed;\n    z-index: 1040;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    background-color: #000;\n    opacity: 0.5;\n"]))); //Modal style
+
+var PickupModal = (0,styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(react_overlays_Modal__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    position: fixed;\n    width: 90vw;\n    max-width: 30em;\n    z-index: 1040;\n    top: 140px;\n    right: 5vw;\n    border: 1px solid #e5e5e5;\n    background-color: white;\n    box-shadow: 0 5px 15px rgb(0 0 0 / 50%);\n    padding: 20px;\n    border-radius: 17px;\n"])));
+var AddPickupButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    background-color: white;\n    position: fixed;\n    top: 2em;\n    right: 2em;\n    z-index: 1;\n    border-radius: 20px;\n    width: 5em;\n    border: 2px solid black;\n    color: black;\n    font-size: 1.1em;\n    box-shadow: none;\n    @media (max-width: 768px) {\n        top: 1.3em;\n        padding: 0.25em;\n        width: 3em;\n        right: 0.7em;\n    }\n    &:hover {\n        border-color: black;\n        color: white;\n        background-color: #d3d3d3;\n        box-shadow: none;\n    }\n    &:focus {\n        border-color: black;\n        color: black;\n        background-color: white;\n        box-shadow: none;\n    }\n"])));
+var AddCalendarButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    background-color: white;\n    position: fixed;\n    top: 2em;\n    right: 8em;\n    z-index: 1;\n    border-radius: 20px;\n    width: 5em;\n    border: 2px solid black;\n    color: black;\n    font-size: 1.1em;\n    box-shadow: none;\n    @media (max-width: 768px) {\n        top: 1.3em;\n        padding: 0.25em;\n        width: 3em;\n        right: 4.2em;\n    }\n    &:hover {\n        border-color: black;\n        color: white;\n        background-color: #d3d3d3;\n        box-shadow: none;\n    }\n    &:focus {\n        border-color: black;\n        color: black;\n        background-color: white;\n        box-shadow: none;\n    }\n"])));
+var DeletCalendarButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    background-color: white;\n    position: fixed;\n    bottom: 2em;\n    right: 2em;\n    z-index: 1;\n    border-radius: 20px;\n    width: 5em;\n    border: 2px solid black;\n    color: black;\n    font-size: 1.1em;\n    box-shadow: none;\n    @media (max-width: 768px) {\n        bottom: 1.3em;\n        right: 0.8em\n        padding: 0.25em;\n        width: 4em;\n    }\n    &:hover {\n        border-color: black;\n        color: white;\n        background-color: #d3d3d3;\n        box-shadow: none;\n    }\n    &:focus {\n        border-color: black;\n        color: black;\n        background-color: white;\n        box-shadow: none;\n    }\n"])));
+var Searchbar = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].input(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    display: block;\n    border-radius: 20px;\n    width: 14em;\n    border: 1px solid black;\n    color: black;\n    font-style: italic;\n    padding-left: 0.4em;\n    position: fixed;\n    right: 2em;\n    top: 8em;\n    @media (max-width: 968px) {\n        display: none;\n    }\n    &:focus-visible {\n        outline: none;\n    }\n"])));
+var PickupImage = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    width: 3em;\n    height: 4em;\n    margin-top: 3px;\n    padding: 32px;\n"])));
 
 /***/ }),
 

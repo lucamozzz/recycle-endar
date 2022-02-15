@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PickUp;
+use App\Models\Calendar;
 use Illuminate\Http\Request;
 
-class PickUpController extends Controller
+class CalendarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class PickUpController extends Controller
     {
         return auth()
             ->user()
-            ->pickups;
+            ->calendars;
     }
 
     /**
@@ -28,15 +28,11 @@ class PickUpController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'type' => 'required',
-            'weekday' => 'required',
-            'start' => 'required',
-            'end' => 'required',
+            'name' => 'required',
+            'description' => 'required',
         ]);
 
-        // $request['user_id'] = auth()->id();
-
-        return PickUp::create($request->all());
+        return Calendar::create($request->all());
     }
 
     /**
@@ -49,7 +45,7 @@ class PickUpController extends Controller
     {
         return auth()
             ->user()
-            ->pickups
+            ->calendars
             ->where('id', $id);
     }
 
@@ -64,7 +60,7 @@ class PickUpController extends Controller
     {
         return auth()
             ->user()
-            ->pickups
+            ->calendars
             ->where('id', $id)
             ->first()
             ->update($request->all());
@@ -80,37 +76,23 @@ class PickUpController extends Controller
     {
         return auth()
             ->user()
-            ->pickups
+            ->calendars
             ->where('id', $id)
             ->first()
             ->destroy($id);
     }
 
     /**
-     * Display the specified pickup based on weekday.
+     * Display the specified calendar based on name.
      *
      * @param  int  $weekday
      * @return \Illuminate\Http\Response
      */
-    public function search($weekday)
+    public function searchByName($name)
     {
         return auth()
             ->user()
-            ->pickups
-            ->where('weekday', $weekday);
-    }
-
-    /**
-     * Display the specified pickup based on calendar.
-     *
-     * @param  int  $weekday
-     * @return \Illuminate\Http\Response
-     */
-    public function searchByCalendar($calendar)
-    {
-        return auth()
-            ->user()
-            ->pickups
-            ->where('calendar_id', $calendar);
+            ->calendars
+            ->where('name', $name);
     }
 }

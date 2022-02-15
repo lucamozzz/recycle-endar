@@ -14,7 +14,8 @@ class PickUp extends Model
         'start',
         'end',
         'notes',
-        'user_id'
+        'user_id',
+        'calendar_id',
     ];
 
     /**
@@ -23,5 +24,13 @@ class PickUp extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the calendar where this pickup is included.
+     */
+    public function calendar()
+    {
+        return $this->belongsTo(Calendar::class);
     }
 }

@@ -40,6 +40,21 @@ export const Register = ({ setUser }) => {
                 const user = get(data.data, 'user', { user: 'none' });
                 const token = get(data.data, 'token', { token: 'none' });
                 setUser({ token, user });
+                try {
+                    await axios.post(`/api/calendars`,
+                        {
+                            name: 'New calendar',
+                            description: 'default',
+                            user_id: user.id,
+                        },
+                        {
+                            headers: {
+                                'Authorization': `Bearer ${token}`
+                            }
+                        });
+                } catch (error) {
+                    console.error(error);
+                }
             }
         } catch (error) {
             console.error(error);

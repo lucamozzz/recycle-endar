@@ -15,7 +15,7 @@ export const FormContainer = styled.div`
     padding: 1em;
 `;
 
-export const PickupsContainer = styled.div`
+export const HorizontalContainer = styled.div`
     display: flex;
     align-items: flex-start;
     overflow-x: auto;
@@ -29,7 +29,7 @@ export const PickupsContainer = styled.div`
 `;
 
 //Pickup blue-bordered container
-export const SinglePickupContainer = styled.div`
+export const SingleContainer = styled.div`
     border-radius: 10px;
     margin: 1em;
     margin-right: -0.5em;
@@ -37,6 +37,20 @@ export const SinglePickupContainer = styled.div`
     width: 15em;
     padding-right: 0.1em;
     padding-top: 0.4em;
+    display: flex;
+    justify-content: space-between;
+`;
+
+//Pickup blue-bordered container
+export const SingleCalendarContainer = styled.button`
+    background: white;
+    border-radius: 10px;
+    border: 3px solid black;
+    margin: 1em;
+    min-width: 12em;
+    margin-right: -0.5em;
+    padding: 0 0.5em;
+    padding-top: 0.3em;
     display: flex;
     justify-content: space-between;
 `;
@@ -57,7 +71,7 @@ export const CloseButton = styled.button`
     padding-bottom: 3.5px;
     padding-left: 5px;
     font-size: 23px;
-    ${SinglePickupContainer}:hover & {
+    ${SingleContainer}:hover & {
         display: unset;
     }
     &:before{
@@ -100,18 +114,84 @@ export const AddPickupButton = styled.button`
     z-index: 1;
     border-radius: 20px;
     width: 5em;
-    border: 3px solid black;
+    border: 2px solid black;
     color: black;
-    font-weight: bold;
+    font-size: 1.1em;
     box-shadow: none;
     @media (max-width: 768px) {
         top: 1.3em;
         padding: 0.25em;
+        width: 3em;
+        right: 0.7em;
     }
     &:hover {
         border-color: black;
         color: white;
-        background-color: black;
+        background-color: #d3d3d3;
+        box-shadow: none;
+    }
+    &:focus {
+        border-color: black;
+        color: black;
+        background-color: white;
+        box-shadow: none;
+    }
+`;
+
+export const AddCalendarButton = styled.button`
+    background-color: white;
+    position: fixed;
+    top: 2em;
+    right: 8em;
+    z-index: 1;
+    border-radius: 20px;
+    width: 5em;
+    border: 2px solid black;
+    color: black;
+    font-size: 1.1em;
+    box-shadow: none;
+    @media (max-width: 768px) {
+        top: 1.3em;
+        padding: 0.25em;
+        width: 3em;
+        right: 4.2em;
+    }
+    &:hover {
+        border-color: black;
+        color: white;
+        background-color: #d3d3d3;
+        box-shadow: none;
+    }
+    &:focus {
+        border-color: black;
+        color: black;
+        background-color: white;
+        box-shadow: none;
+    }
+`;
+
+export const DeletCalendarButton = styled.button`
+    background-color: white;
+    position: fixed;
+    bottom: 2em;
+    right: 2em;
+    z-index: 1;
+    border-radius: 20px;
+    width: 5em;
+    border: 2px solid black;
+    color: black;
+    font-size: 1.1em;
+    box-shadow: none;
+    @media (max-width: 768px) {
+        bottom: 1.3em;
+        right: 0.8em
+        padding: 0.25em;
+        width: 4em;
+    }
+    &:hover {
+        border-color: black;
+        color: white;
+        background-color: #d3d3d3;
         box-shadow: none;
     }
     &:focus {

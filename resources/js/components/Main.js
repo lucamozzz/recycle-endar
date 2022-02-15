@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AppContainer } from './style';
-import Calendar from './Calendar';
+import Application from './Application';
 import Register from './Register';
 import Login from './Login';
 import ReactDOM from 'react-dom';
@@ -13,7 +13,7 @@ export const Main = () => {
         if (user != undefined) {
             setComponent(
                 <AppContainer>
-                    <Calendar loggedUser={user} />
+                    <Application loggedUser={user} />
                 </AppContainer>
             )
         } else {

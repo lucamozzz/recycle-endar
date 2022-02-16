@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Backdrop, PickupModal, AddPickupButton, Searchbar, HorizontalContainer, SingleCalendarContainer, AddCalendarButton, DeletCalendarButton } from './style';
+import { Backdrop, PickupModal, AddPickupButton, Searchbar, HorizontalContainer, SingleCalendarContainer, AddCalendarButton, DeleteCalendarButton, EditCalendarButton } from './style';
 import Wday from './Wday';
 import axios from 'axios';
 import Calendar from './Calendar';
@@ -21,7 +21,7 @@ export const Application = ({ loggedUser }) => {
     const [start, setStart] = useState("");
     const [end, setEnd] = useState("");
     const [name, setName] = useState("");
-    const [description, setDescription] = useState("Default");
+    const [description, setDescription] = useState("Default text");
     const [token, setToken] = useState(loggedUser.token);
     const [userId, setUserId] = useState(loggedUser.user.id);
     const [selectedCalendar, setSelectedCalendar] = useState();
@@ -143,10 +143,32 @@ export const Application = ({ loggedUser }) => {
         }
     }
 
-    //Pickup modal show setting
+    const editCalendar = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.put(`api/calendars/${selectedCalendar}`,
+                {
+                    name: name,
+                    description: description,
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+            setCount(count - 1);
+            setShowEditCalendarModal(false);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    //Create Pickup modal show setting
     const [show, setShow] = useState(false);
-    //Calendar modal show setting
+    //Create Calendar modal show setting
     const [showCalendarModal, setShowCalendarModal] = useState(false);
+    //Edit calendar modal show setting
+    const [showEditCalendarModal, setShowEditCalendarModal] = useState(false);
     const renderBackdrop = (props) => <Backdrop {...props} />;
 
     //Reload pickups everytime the count value changes
@@ -189,13 +211,20 @@ export const Application = ({ loggedUser }) => {
             >
                 📅
             </AddCalendarButton>
-            <DeletCalendarButton
+            <DeleteCalendarButton
                 type="button"
                 className="btn btn-primary"
                 onClick={() => deleteCalendar(selectedCalendar)}
             >
                 🗑️
-            </DeletCalendarButton>
+            </DeleteCalendarButton>
+            <EditCalendarButton
+                type="button"
+                className="btn btn-primary"
+                onClick={() => setShowEditCalendarModal(true)}
+            >
+                ✏️
+            </EditCalendarButton>
             <div className="container">
                 <HorizontalContainer>
                     {
@@ -261,7 +290,7 @@ export const Application = ({ loggedUser }) => {
                 aria-labelledby="modal-label"
             >
                 <div>
-                    <h4 id="modal-label">Create new Pickup</h4>
+                    <h4 id="modal-label">Create a new Pickup</h4>
                     <form onSubmit={createPickup}>
                         <label className="form-label" htmlFor="type">Select type: </label>
                         <select className="form-select" type="type" value={type} onChange={e => setType(e.target.value)} required >
@@ -302,10 +331,27 @@ export const Application = ({ loggedUser }) => {
                 aria-labelledby="modal-label"
             >
                 <div>
-                    <h4 id="modal-label">Create new Calendar</h4>
+                    <h4 id="modal-label">Create a new Calendar</h4>
                     <form onSubmit={createCalendar}>
                         <label className="form-label" htmlFor="type">Insert name: </label>
                         <input className="form-control" type="text" value={name} onChange={e => setName(e.target.value)} required /><br />
+                        <input className="btn btn-primary" type="submit" value="Confirm" />
+                    </form>
+                </div>
+            </PickupModal>
+            <PickupModal
+                show={showEditCalendarModal}
+                onHide={() => setShowEditCalendarModal(false)}
+                renderBackdrop={renderBackdrop}
+                aria-labelledby="modal-label"
+            >
+                <div>
+                    <h4 id="modal-label">Edit Calendar</h4>
+                    <form onSubmit={editCalendar}>
+                        <label className="form-label" htmlFor="type">Edit name: </label>
+                        <input className="form-control" type="text" onChange={e => setName(e.target.value)} required /><br />
+                        <label className="form-label" htmlFor="type">Edit description: </label>
+                        <input className="form-control" type="text" onChange={e => setDescription(e.target.value)} required /><br />
                         <input className="btn btn-primary" type="submit" value="Confirm" />
                     </form>
                 </div>

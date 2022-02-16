@@ -43,7 +43,7 @@ export const Register = ({ setUser }) => {
                 try {
                     await axios.post(`/api/calendars`,
                         {
-                            name: 'New calendar',
+                            name: 'Calendar 1',
                             description: 'default',
                             user_id: user.id,
                         },

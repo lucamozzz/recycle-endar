@@ -170,7 +170,7 @@ export const AddCalendarButton = styled.button`
     }
 `;
 
-export const DeletCalendarButton = styled.button`
+export const DeleteCalendarButton = styled.button`
     background-color: white;
     position: fixed;
     bottom: 2em;
@@ -185,6 +185,38 @@ export const DeletCalendarButton = styled.button`
     @media (max-width: 768px) {
         bottom: 1.3em;
         right: 0.8em
+        padding: 0.25em;
+        width: 4em;
+    }
+    &:hover {
+        border-color: black;
+        color: white;
+        background-color: #d3d3d3;
+        box-shadow: none;
+    }
+    &:focus {
+        border-color: black;
+        color: black;
+        background-color: white;
+        box-shadow: none;
+    }
+`;
+
+export const EditCalendarButton = styled.button`
+    background-color: white;
+    position: fixed;
+    bottom: 2em;
+    right: 8em;
+    z-index: 1;
+    border-radius: 20px;
+    width: 5em;
+    border: 2px solid black;
+    color: black;
+    font-size: 1.1em;
+    box-shadow: none;
+    @media (max-width: 768px) {
+        bottom: 1.3em;
+        right: 4.2em
         padding: 0.25em;
         width: 4em;
     }
